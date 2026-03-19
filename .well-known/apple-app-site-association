@@ -1,0 +1,20 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TEAMID.com.yourcompany.sviewapp",
+        "paths": [
+          "/open/*",
+          "/share/*",
+          "/view/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "TEAMID.com.yourcompany.sviewapp"
+    ]
+  }
+}
