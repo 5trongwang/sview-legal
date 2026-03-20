@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "TEAMID.com.yourcompany.sviewapp",
+        "appID": "ZZCBU4BU5J.com.strongwang.sview",
         "paths": [
           "/open/*",
           "/share/*",
@@ -14,7 +14,7 @@
   },
   "webcredentials": {
     "apps": [
-      "TEAMID.com.yourcompany.sviewapp"
+      "ZZCBU4BU5J.com.strongwang.sview"
     ]
   }
 }
