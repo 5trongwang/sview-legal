@@ -136,11 +136,11 @@
       margin-top: 64px;
       overflow-x: auto; overflow-y: hidden;
       scrollbar-width: none; -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
       padding-bottom: 20px;
       cursor: grab;
     }
-    .gallery:active { cursor: grabbing; }
+    .gallery.dragging { cursor: grabbing; scroll-snap-type: none; }
     .gallery::-webkit-scrollbar { display: none; }
     .gallery-scrollbar-wrap {
       height: 2px;
@@ -182,7 +182,6 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       padding: 16px 14px 18px;
-      background: linear-gradient(180deg, rgba(20,20,20,0.92) 0%, rgba(20,20,20,0.78) 70%, transparent 100%);
       pointer-events: none;
     }
     .gallery-overlay p {
@@ -636,49 +635,103 @@
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  // Gallery horizontal wheel scroll with smooth easing
+  // Gallery scroll system
   var gallery = document.getElementById('gallery');
   var galleryThumb = document.getElementById('gallery-thumb');
-  var scrollTarget = 0;
-  var scrolling = false;
-  var scrollbarTimer = null;
+  var scrollbarTimer = null, snapTimer = null;
+
+  // -- Scrollbar --
   function updateThumb() {
-    var maxScroll = gallery.scrollWidth - gallery.clientWidth;
-    if (maxScroll <= 0) return;
-    var ratio = gallery.scrollLeft / maxScroll;
-    var wrapWidth = galleryThumb.parentElement.offsetWidth;
-    var thumbW = Math.max(40, wrapWidth * (gallery.clientWidth / gallery.scrollWidth));
-    galleryThumb.style.width = thumbW + 'px';
-    galleryThumb.style.left = (ratio * (wrapWidth - thumbW)) + 'px';
+    var max = gallery.scrollWidth - gallery.clientWidth;
+    if (max <= 0) return;
+    var wrap = galleryThumb.parentElement.offsetWidth;
+    var tw = Math.max(40, wrap * (gallery.clientWidth / gallery.scrollWidth));
+    galleryThumb.style.width = tw + 'px';
+    galleryThumb.style.left = ((gallery.scrollLeft / max) * (wrap - tw)) + 'px';
   }
   function showScrollbar() {
     gallery.classList.add('scrolling');
     updateThumb();
     clearTimeout(scrollbarTimer);
-    scrollbarTimer = setTimeout(function() { gallery.classList.remove('scrolling'); }, 1000);
+    scrollbarTimer = setTimeout(function() { gallery.classList.remove('scrolling'); }, 1200);
   }
   gallery.addEventListener('scroll', showScrollbar, { passive: true });
+
+  // -- Snap lock: JS 动画期间关闭 snap，结束后恢复 --
+  function lockSnap() {
+    clearTimeout(snapTimer);
+    gallery.style.scrollSnapType = 'none';
+  }
+  function unlockSnap() {
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(function() { gallery.style.scrollSnapType = ''; }, 60);
+  }
+
+  // -- Wheel → horizontal (仅拦截纵向滚轮，横向手势原生处理) --
+  var wTarget = 0, wRaf = null;
   gallery.addEventListener('wheel', function(e) {
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-    if (e.deltaY !== 0) {
-      e.preventDefault();
-      showScrollbar();
-      scrollTarget = gallery.scrollLeft + e.deltaY * 2.5;
-      if (!scrolling) {
-        scrolling = true;
-        (function smoothScroll() {
-          var diff = scrollTarget - gallery.scrollLeft;
-          if (Math.abs(diff) > 0.5) {
-            gallery.scrollLeft += diff * 0.15;
-            requestAnimationFrame(smoothScroll);
-          } else {
-            gallery.scrollLeft = scrollTarget;
-            scrolling = false;
-          }
-        })();
-      }
+    if (e.deltaY === 0) return;
+    var maxS = gallery.scrollWidth - gallery.clientWidth;
+    var atStart = gallery.scrollLeft <= 0;
+    var atEnd = gallery.scrollLeft >= maxS - 1;
+    // 到头时放行给页面滚动
+    if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) {
+      if (wRaf) { cancelAnimationFrame(wRaf); wRaf = null; unlockSnap(); }
+      return;
+    }
+    e.preventDefault();
+    lockSnap();
+    if (!wRaf) wTarget = gallery.scrollLeft;
+    wTarget += e.deltaY * 2;
+    wTarget = Math.max(0, Math.min(wTarget, maxS));
+    if (!wRaf) {
+      (function tick() {
+        var diff = wTarget - gallery.scrollLeft;
+        if (Math.abs(diff) > 1) {
+          gallery.scrollLeft += Math.round(diff * 0.15) || (diff > 0 ? 1 : -1);
+          wRaf = requestAnimationFrame(tick);
+        } else {
+          gallery.scrollLeft = Math.round(wTarget);
+          wRaf = null;
+          unlockSnap();
+        }
+      })();
     }
   }, { passive: false });
+
+  // -- Mouse drag with momentum --
+  var drag = null;
+  gallery.addEventListener('mousedown', function(e) {
+    if (wRaf) { cancelAnimationFrame(wRaf); wRaf = null; }
+    drag = { sx: e.pageX, sl: gallery.scrollLeft, lx: e.pageX, lt: Date.now(), v: 0 };
+    gallery.classList.add('dragging');
+    lockSnap();
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!drag) return;
+    e.preventDefault();
+    var now = Date.now(), dt = now - drag.lt;
+    if (dt > 0) drag.v = (drag.lx - e.pageX) / dt;
+    drag.lx = e.pageX; drag.lt = now;
+    gallery.scrollLeft = drag.sl + (drag.sx - e.pageX);
+  });
+  window.addEventListener('mouseup', function() {
+    if (!drag) return;
+    var v = drag.v * 250;
+    drag = null;
+    gallery.classList.remove('dragging');
+    if (Math.abs(v) > 10) {
+      var target = gallery.scrollLeft + v;
+      (function coast() {
+        var diff = target - gallery.scrollLeft;
+        if (Math.abs(diff) > 1) {
+          gallery.scrollLeft += Math.round(diff * 0.08) || (diff > 0 ? 1 : -1);
+          requestAnimationFrame(coast);
+        } else { unlockSnap(); }
+      })();
+    } else { unlockSnap(); }
+  });
 
   // Scroll animations
   var observer = new IntersectionObserver(function(entries) {
