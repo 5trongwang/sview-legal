@@ -3,138 +3,701 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SView App</title>
+  <title>SView — Show your work. Tell your story.</title>
+  <meta name="description" content="A photo cropping and layout tool. Create seamless carousels and collage posts for social media.">
+  <meta property="og:title" content="SView — Swipe Carousel Maker">
+  <meta property="og:description" content="A photo cropping and layout tool for social media.">
+  <meta property="og:image" content="https://sviewapp.com/assets/iphone/1.png">
+  <meta property="og:url" content="https://sviewapp.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --font-serif: "Cormorant Garamond", "Noto Serif", "Songti SC", Georgia, serif;
+      --font-sans: "Source Sans 3", -apple-system, "PingFang SC", "Hiragino Sans",
+                   "Noto Sans SC", "Noto Sans JP", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      --color-bg: #fafaf8;
+      --color-surface: #ffffff;
+      --color-text: #111111;
+      --color-text-secondary: #666666;
+      --color-text-muted: #999999;
+      --color-border: #e8e8e8;
+      --color-rule: #e0e0e0;
+      --color-accent: #000000;
+      --color-accent-hover: #333333;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: var(--font-sans);
       font-size: 16px;
       line-height: 1.6;
-      color: #1a1a1a;
-      background: #f5f5f7;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .hero {
-      background: #fff;
-      text-align: center;
-      padding: 64px 24px 48px;
-      border-bottom: 1px solid #e5e5e5;
+    /* ===== NAV ===== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 56px;
+      transition: background 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
     }
-    .app-icon {
-      width: 80px; height: 80px;
-      border-radius: 20px;
-      margin: 0 auto 20px;
+    .nav.scrolled {
+      background: rgba(250, 250, 248, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: rgba(0,0,0,0.06);
+    }
+    .nav-logo img { height: 18px; width: auto; display: block; filter: brightness(0); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+
+    .lang-selector { position: relative; }
+    .lang-btn {
+      background: none; border: 1px solid var(--color-border); border-radius: 6px;
+      padding: 4px 10px; font-family: var(--font-sans); font-size: 13px; font-weight: 600;
+      color: var(--color-text-secondary); cursor: pointer; letter-spacing: 0.03em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .lang-btn:hover { border-color: var(--color-text-secondary); color: var(--color-text); }
+    .lang-dropdown {
+      display: none; position: absolute; top: calc(100% + 6px); right: 0;
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: 8px; padding: 4px 0; min-width: 120px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .lang-dropdown.open { display: block; }
+    .lang-option {
+      display: block; width: 100%; padding: 8px 16px; background: none; border: none;
+      font-family: var(--font-sans); font-size: 14px; color: var(--color-text-secondary);
+      cursor: pointer; text-align: left; transition: background 0.15s;
+    }
+    .lang-option:hover { background: #f5f5f3; color: var(--color-text); }
+    .lang-option.active { color: var(--color-text); font-weight: 600; }
+
+    .nav-download {
+      display: inline-block; background: var(--color-accent); color: #fff;
+      padding: 7px 18px; border-radius: 100px; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: background 0.2s; letter-spacing: 0.01em;
+    }
+    .nav-download:hover { background: var(--color-accent-hover); }
+
+    /* ===== HERO ===== */
+    .hero { text-align: center; padding: 56px 24px 0; }
+
+    .hero-icon {
+      width: 88px; height: 88px; border-radius: 22%; margin: 0 auto 16px;
       overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 2px 16px rgba(0,0,0,0.06);
     }
-    .app-icon svg {
-      width: 100%; height: 100%;
+    .hero-icon svg { width: 100%; height: 100%; display: block; }
+
+    .hero-app-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 6vw, 52px);
+      font-weight: 500; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--color-text); margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px; color: var(--color-text-secondary);
+      max-width: 460px; margin: 0 auto 32px; line-height: 1.5;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--color-accent); color: #fff;
+      padding: 14px 36px; border-radius: 100px; font-size: 16px; font-weight: 600;
+      text-decoration: none; transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: var(--color-accent-hover); transform: translateY(-1px); }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      margin-top: 64px;
+      overflow-x: auto; overflow-y: hidden;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 20px;
+      cursor: grab;
+    }
+    .gallery:active { cursor: grabbing; }
+    .gallery::-webkit-scrollbar { display: none; }
+    .gallery-scrollbar-wrap {
+      height: 2px;
+      margin: 8px max(24px, calc((100vw - 1080px) / 2)) 60px;
+      background: transparent;
+      position: relative;
+    }
+    .gallery-scrollbar-thumb {
+      position: absolute; top: 0; left: 0;
+      height: 2px; width: 60px;
+      background: transparent;
+      border-radius: 1px;
+      transition: background 0.4s, left 0.05s linear;
+    }
+    .gallery.scrolling ~ .gallery-scrollbar-wrap .gallery-scrollbar-thumb { background: rgba(0,0,0,0.22); }
+
+    .gallery-track {
+      display: flex; gap: 16px; width: max-content;
+      padding: 0 max(24px, calc((100vw - 1080px) / 2));
+    }
+
+    .gallery-item {
+      position: relative;
+      flex-shrink: 0;
+      scroll-snap-align: center;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #1e1e1e;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .gallery-item img {
+      height: 384px;
+      width: auto;
       display: block;
     }
-    .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-    .hero p { color: #666; font-size: 17px; max-width: 480px; margin: 0 auto 28px; }
-    .badge {
-      display: inline-block; background: #000; color: #fff;
-      padding: 10px 24px; border-radius: 12px;
-      font-size: 15px; font-weight: 500; text-decoration: none;
+
+    /* Text overlay on top of each preview card */
+    .gallery-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 16px 14px 18px;
+      background: linear-gradient(180deg, rgba(20,20,20,0.92) 0%, rgba(20,20,20,0.78) 70%, transparent 100%);
+      pointer-events: none;
     }
-    .badge:hover { background: #333; }
+    .gallery-overlay p {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      text-align: left;
+    }
 
-    .container { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
-
+    /* ===== FEATURES ===== */
     .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px; margin-bottom: 48px;
+      max-width: 600px; margin: 0 auto; padding: 0 24px 80px;
     }
-    .feature { background: #fff; border-radius: 14px; padding: 24px; }
-    .feature-icon { font-size: 28px; margin-bottom: 10px; }
-    .feature h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-    .feature p { font-size: 14px; color: #666; }
-
-    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
-    .faq { margin-bottom: 48px; }
-    .faq-item { background: #fff; border-radius: 14px; padding: 20px 24px; margin-bottom: 10px; }
-    .faq-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-    .faq-item p { font-size: 14px; color: #444; }
-
-    .contact { background: #fff; border-radius: 14px; padding: 28px 24px; text-align: center; }
-    .contact h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-    .contact p { color: #666; font-size: 14px; margin-bottom: 20px; }
-    .contact a.email-btn {
-      display: inline-block; background: #0066cc; color: #fff;
-      padding: 12px 28px; border-radius: 10px;
-      text-decoration: none; font-weight: 500; font-size: 15px;
+    .features-heading {
+      font-family: var(--font-serif); font-size: 34px; font-weight: 500;
+      color: var(--color-text); margin-bottom: 32px;
     }
-    .contact a.email-btn:hover { background: #0055aa; }
+    .feature-item {
+      border-top: 1px solid var(--color-rule); padding: 20px 0;
+    }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-title {
+      font-size: 16px; font-weight: 600; color: var(--color-text); margin-bottom: 4px;
+    }
+    .feature-desc {
+      font-size: 15px; color: var(--color-text-secondary); line-height: 1.5;
+    }
 
-    footer { text-align: center; padding: 24px; font-size: 13px; color: #999; }
-    footer a { color: #999; text-decoration: underline; }
+    /* Badges row for ratio/resolution features */
+    .feature-badges {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+    }
+    .badge-tag {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 3px 8px; border-radius: 4px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+      background: #f0efed; color: #555;
+      border: 1px solid #e0dfdd;
+      white-space: nowrap;
+    }
+    .badge-tag.accent {
+      background: var(--color-text); color: #fff; border-color: var(--color-text);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center; padding: 56px 24px 40px;
+    }
+    .footer-logo { margin-bottom: 20px; }
+    .footer-logo img { height: 14px; width: auto; opacity: 0.4; }
+    .footer-links { font-size: 14px; color: var(--color-text-muted); margin-bottom: 8px; }
+    .footer-links a { color: var(--color-text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--color-text-secondary); }
+    .footer-links .sep { margin: 0 10px; }
+    .footer-email { margin-bottom: 16px; }
+    .footer-email a { font-size: 14px; color: var(--color-text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-email a:hover { color: var(--color-text-secondary); }
+    .footer-copy { font-size: 13px; color: var(--color-text-muted); opacity: 0.7; }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.6s cubic-bezier(0.25,0.1,0.25,1),
+                  transform 0.6s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== CJK ===== */
+    .lang-cjk .hero-tagline { letter-spacing: 0.04em; }
+    .lang-cjk .feature-title, .lang-cjk .feature-desc { line-height: 1.7; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .nav { padding: 0 20px; height: 50px; }
+      .nav-logo img { height: 15px; }
+      .nav-download { padding: 6px 14px; font-size: 12px; }
+      .lang-btn { font-size: 12px; padding: 3px 8px; }
+
+      .hero { padding: 40px 20px 0; }
+      .hero-icon { width: 72px; height: 72px; margin-bottom: 14px; }
+      .hero-app-title { font-size: 12px; margin-bottom: 20px; }
+      .hero-subtitle { font-size: 15px; margin-bottom: 28px; }
+      .hero-cta { padding: 11px 28px; font-size: 14px; }
+
+      .gallery { margin-top: 48px; padding-bottom: 16px; }
+      .gallery-scrollbar-wrap { margin-bottom: 44px; }
+      .gallery-track { gap: 12px; padding: 0 20px; }
+      .gallery-item img { height: 300px; }
+      .gallery-item { border-radius: 12px; }
+      .gallery-overlay { padding: 14px 14px; }
+      .gallery-overlay p { font-size: 12px; }
+
+      .features { padding: 0 20px 56px; }
+      .features-heading { font-size: 24px; margin-bottom: 24px; }
+
+      footer { padding: 40px 20px 32px; }
+    }
   </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="app-icon"><svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" fill="#EDEDED"/><path d="M102.68 166H170.746L182.758 346H114.691L102.68 166Z" fill="black"/><path d="M269.672 166H337.738L349.75 346H281.684L269.672 166Z" fill="black"/><path d="M261.859 166H193.793L181.781 346H249.848L261.859 166Z" fill="black"/><path d="M94.5763 166H25.3442L6 211L32.4711 301L13.1268 346H82.3589L101.703 301L75.232 211L94.5763 166Z" fill="black"/><path d="M345.844 166H414.74L426.898 346H358.002L345.844 166Z" fill="black"/><path d="M506 166H438.764L426.898 346H494.135L506 166Z" fill="black"/></svg></div>
-  <h1>SView</h1>
-  <p>Effortlessly create seamless carousels to showcase your work beautifully on any social platform.</p>
-  <a class="badge" href="https://apps.apple.com" target="_blank">Download on the App Store</a>
-</div>
-
-<div class="container">
-
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">🖼️</div>
-      <h3>Wide Format Support</h3>
-      <p>Import panoramic and wide photos from your library without losing any detail.</p>
+<!-- NAV -->
+<nav class="nav" role="navigation">
+  <a href="/" class="nav-logo" aria-label="SView Home">
+    <img src="assets/logo.svg" alt="SView">
+  </a>
+  <div class="nav-right">
+    <div class="lang-selector">
+      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">EN</button>
+      <div class="lang-dropdown" id="langDropdown" role="menu">
+        <button class="lang-option active" data-lang="en" role="menuitem">English</button>
+        <button class="lang-option" data-lang="zh" role="menuitem">简体中文</button>
+        <button class="lang-option" data-lang="zh-Hant" role="menuitem">繁體中文</button>
+        <button class="lang-option" data-lang="ja" role="menuitem">日本語</button>
+        <button class="lang-option" data-lang="ko" role="menuitem">한국어</button>
+        <button class="lang-option" data-lang="es" role="menuitem">Español</button>
+      </div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">📱</div>
-      <h3>Social Ready</h3>
-      <p>Export perfectly framed images for Instagram, X, and other platforms.</p>
+    <a class="nav-download" href="https://apps.apple.com" target="_blank" data-i18n="nav.download">Download</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-icon fade-in">
+    <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" fill="#EDEDED"/><path d="M102.68 166H170.746L182.758 346H114.691L102.68 166Z" fill="black"/><path d="M269.672 166H337.738L349.75 346H281.684L269.672 166Z" fill="black"/><path d="M261.859 166H193.793L181.781 346H249.848L261.859 166Z" fill="black"/><path d="M94.5763 166H25.3442L6 211L32.4711 301L13.1268 346H82.3589L101.703 301L75.232 211L94.5763 166Z" fill="black"/><path d="M345.844 166H414.74L426.898 346H358.002L345.844 166Z" fill="black"/><path d="M506 166H438.764L426.898 346H494.135L506 166Z" fill="black"/></svg>
+  </div>
+  <div class="hero-app-title fade-in">SView &ndash; Swipe Carousel Maker</div>
+  <h1 class="hero-tagline fade-in" data-i18n="hero.tagline">Show your work<br>Tell your story</h1>
+  <p class="hero-subtitle fade-in" data-i18n="hero.subtitle">A photo cropping &amp; layout tool for creating seamless carousels and collages on social media.</p>
+  <a class="hero-cta fade-in" href="https://apps.apple.com" target="_blank"><span data-i18n="hero.cta">Download on the App Store</span></a>
+
+  <!-- GALLERY -->
+  <div class="gallery fade-in" id="gallery" role="region" aria-label="App screenshots" tabindex="0">
+    <div class="gallery-track">
+      <div class="gallery-item">
+        <img src="assets/iphone/1.png" alt="" loading="eager">
+        <div class="gallery-overlay"><p data-i18n="preview.1">SView<br>Create panoramic carousels and collages for social media</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/iphone/2.png" alt="" loading="eager">
+        <div class="gallery-overlay"><p data-i18n="preview.2">Seamless carousels<br>Creative collages<br>A free canvas</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/iphone/3.png" alt="" loading="lazy">
+        <div class="gallery-overlay"><p data-i18n="preview.3">Multiple aspect ratios,<br>Ready for every platform</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/iphone/4.png" alt="" loading="lazy">
+        <div class="gallery-overlay"><p data-i18n="preview.4">Smart assistance,<br>Easy layout</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/iphone/5.png" alt="" loading="lazy">
+        <div class="gallery-overlay"><p data-i18n="preview.5">High-resolution export,<br>Fast sharing</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/iphone/6.png" alt="" loading="lazy">
+        <div class="gallery-overlay"><p data-i18n="preview.6">Simple tools,<br>Nothing extra</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/iphone/7.png" alt="" loading="lazy">
+        <div class="gallery-overlay"><p data-i18n="preview.7">Show your work,<br>Tell your story</p></div>
+      </div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">🔒</div>
-      <h3>Privacy First</h3>
-      <p>All processing happens on your device. Your photos never leave your phone.</p>
+  </div>
+  <div class="gallery-scrollbar-wrap"><div class="gallery-scrollbar-thumb" id="gallery-thumb"></div></div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <h2 class="features-heading fade-in" data-i18n="features.heading">Why SView</h2>
+
+  <div class="feature-item fade-in">
+    <div class="feature-title" data-i18n="features.carousel.title">Seamless Panoramic Carousels</div>
+    <div class="feature-desc" data-i18n="features.carousel.desc">Import wide photos and panoramas. SView splits them into perfectly aligned carousel slides.</div>
+  </div>
+
+  <div class="feature-item fade-in">
+    <div class="feature-title" data-i18n="features.collage.title">Creative Collage Canvas</div>
+    <div class="feature-desc" data-i18n="features.collage.desc">Arrange photos freely on a canvas with full control over layout, position, and framing.</div>
+  </div>
+
+  <div class="feature-item fade-in">
+    <div class="feature-title" data-i18n="features.ratio.title">Every Platform, Every Ratio</div>
+    <div class="feature-desc" data-i18n="features.ratio.desc">All major aspect ratios supported. Optimized for Instagram, X, TikTok, and rednote.</div>
+    <div class="feature-badges">
+      <span class="badge-tag">4:5</span>
+      <span class="badge-tag">3:4</span>
+      <span class="badge-tag">2:3</span>
+      <span class="badge-tag">9:16</span>
+      <span class="badge-tag">1:1</span>
+      <span class="badge-tag">1.91:1</span>
     </div>
   </div>
 
-  <div class="faq">
-    <div class="section-title">Frequently Asked Questions</div>
-
-    <div class="faq-item">
-      <h4>How do I restore my Pro subscription?</h4>
-      <p>Open SView → tap the settings icon → tap "Restore Purchases". Your subscription will be restored automatically if you're signed in with the same Apple ID used for the original purchase.</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>Does SView upload my photos?</h4>
-      <p>No. All photo processing is done entirely on your device. We never upload, store, or access your photos on any server.</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>Which photo formats are supported?</h4>
-      <p>SView supports all standard iOS photo formats including JPEG, PNG, HEIC, and wide-format panoramic photos.</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>I was charged but Pro features aren't unlocked. What should I do?</h4>
-      <p>Please use "Restore Purchases" first. If the issue persists, contact us at support@sviewapp.com with your Apple transaction ID and we'll resolve it promptly.</p>
+  <div class="feature-item fade-in">
+    <div class="feature-title" data-i18n="features.export.title">High-Resolution Export</div>
+    <div class="feature-desc" data-i18n="features.export.desc">Share directly or save to Camera Roll in maximum quality.</div>
+    <div class="feature-badges">
+      <span class="badge-tag accent">4K</span>
+      <span class="badge-tag accent">6K</span>
     </div>
   </div>
 
-  <div class="contact">
-    <h3>Need Help?</h3>
-    <p>Can't find what you're looking for? We typically respond within 1–2 business days.</p>
-    <a class="email-btn" href="mailto:support@sviewapp.com">support@sviewapp.com</a>
+  <div class="feature-item fade-in">
+    <div class="feature-title" data-i18n="features.privacy.title">Privacy First</div>
+    <div class="feature-desc" data-i18n="features.privacy.desc">All processing happens on-device. Your photos never leave your phone.</div>
   </div>
+</section>
 
-</div>
-
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 SView &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms.html">Terms of Use</a></p>
+  <div class="footer-logo"><img src="assets/logo.svg" alt="SView"></div>
+  <div class="footer-links">
+    <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+    <span class="sep">&middot;</span>
+    <a href="/terms.html" data-i18n="footer.terms">Terms of Use</a>
+  </div>
+  <div class="footer-email"><a href="mailto:support@sviewapp.com">support@sviewapp.com</a></div>
+  <div class="footer-copy">&copy; 2026 SView</div>
 </footer>
+
+<script>
+(function() {
+  const T = {
+    en: {
+      'nav.download': 'Download',
+      'hero.tagline': 'Show your work\nTell your story',
+      'hero.subtitle': 'A photo cropping & layout tool for creating seamless carousels and collages on social media.',
+      'hero.cta': 'Download on the App Store',
+      'features.heading': 'Why SView',
+      'features.carousel.title': 'Seamless Panoramic Carousels',
+      'features.carousel.desc': 'Import wide photos and panoramas. SView splits them into perfectly aligned carousel slides.',
+      'features.collage.title': 'Creative Collage Canvas',
+      'features.collage.desc': 'Arrange photos freely on a canvas with full control over layout, position, and framing.',
+      'features.ratio.title': 'Every Platform, Every Ratio',
+      'features.ratio.desc': 'All major aspect ratios supported. Optimized for Instagram, X, TikTok, and rednote.',
+      'features.export.title': 'High-Resolution Export',
+      'features.export.desc': 'Share directly or save to Camera Roll in maximum quality.',
+      'features.privacy.title': 'Privacy First',
+      'features.privacy.desc': 'All processing happens on-device. Your photos never leave your phone.',
+      'footer.privacy': 'Privacy Policy',
+      'footer.terms': 'Terms of Use',
+      'preview.1': 'SView\nCreate panoramic carousels and collages for social media',
+      'preview.2': 'Seamless carousels\nCreative collages\nA free canvas',
+      'preview.3': 'Multiple aspect ratios,\nReady for every platform',
+      'preview.4': 'Smart assistance,\nEasy layout',
+      'preview.5': 'High-resolution export,\nFast sharing',
+      'preview.6': 'Simple tools,\nNothing extra',
+      'preview.7': 'Show your work,\nTell your story'
+    },
+    zh: {
+      'nav.download': '下载',
+      'hero.tagline': '展示你的作品\n讲述你的故事',
+      'hero.subtitle': '照片裁切与排版工具，轻松制作无缝轮播图和创意拼贴，一键发布社交平台。',
+      'hero.cta': '从苹果商店下载',
+      'features.heading': '主要功能',
+      'features.carousel.title': '无缝全景轮播',
+      'features.carousel.desc': '导入宽幅照片和全景图，SView 将其分割为完美对齐的轮播卡片。',
+      'features.collage.title': '创意拼贴画布',
+      'features.collage.desc': '在画布上自由排列照片，完全掌控布局、位置和构图。',
+      'features.ratio.title': '全平台，全比例',
+      'features.ratio.desc': '支持所有主流比例，适配 Instagram、X、抖音、小红书。',
+      'features.export.title': '高分辨率导出',
+      'features.export.desc': '直接分享或以最高质量保存到相册。',
+      'features.privacy.title': '隐私优先',
+      'features.privacy.desc': '所有处理均在设备端完成，您的照片绝不离开手机。',
+      'footer.privacy': '隐私政策',
+      'footer.terms': '使用条款',
+      'preview.1': 'SView\n为社交媒体创建全景轮播和拼贴',
+      'preview.2': '无缝轮播\n创意拼贴\n自由画布',
+      'preview.3': '多种宽高比，\n适配每个平台',
+      'preview.4': '智能辅助，\n轻松排版',
+      'preview.5': '高分辨率导出，\n快速分享',
+      'preview.6': '简洁工具，\n恰到好处',
+      'preview.7': '展示你的作品，\n讲述你的故事'
+    },
+    'zh-Hant': {
+      'nav.download': '下載',
+      'hero.tagline': '展示你的作品\n講述你的故事',
+      'hero.subtitle': '照片裁切與排版工具，輕鬆製作無縫輪播圖和創意拼貼，一鍵發佈社群平台。',
+      'hero.cta': '從 App Store 下載',
+      'features.heading': '主要功能',
+      'features.carousel.title': '無縫全景輪播',
+      'features.carousel.desc': '匯入寬幅照片和全景圖，SView 將其分割為完美對齊的輪播卡片。',
+      'features.collage.title': '創意拼貼畫布',
+      'features.collage.desc': '在畫布上自由排列照片，完全掌控佈局、位置和構圖。',
+      'features.ratio.title': '全平台，全比例',
+      'features.ratio.desc': '支援所有主流比例，適配 Instagram、X、TikTok、rednote。',
+      'features.export.title': '高解析度匯出',
+      'features.export.desc': '直接分享或以最高品質儲存到相簿。',
+      'features.privacy.title': '隱私優先',
+      'features.privacy.desc': '所有處理均在裝置端完成，您的照片絕不離開手機。',
+      'footer.privacy': '隱私權政策',
+      'footer.terms': '使用條款',
+      'preview.1': 'SView\n為社群媒體建立全景輪播和拼貼',
+      'preview.2': '無縫輪播\n創意拼貼\n自由畫布',
+      'preview.3': '多種寬高比，\n適配每個平台',
+      'preview.4': '智慧輔助，\n輕鬆排版',
+      'preview.5': '高解析度匯出，\n快速分享',
+      'preview.6': '簡潔工具，\n恰到好處',
+      'preview.7': '展示你的作品，\n講述你的故事'
+    },
+    ja: {
+      'nav.download': 'ダウンロード',
+      'hero.tagline': '作品を見せよう\n物語を伝えよう',
+      'hero.subtitle': '写真の切り抜き・レイアウトツール。SNS映えするカルーセルやコラージュをかんたん作成。',
+      'hero.cta': 'App Store からダウンロード',
+      'features.heading': 'SView でできること',
+      'features.carousel.title': 'シームレスなパノラマカルーセル',
+      'features.carousel.desc': 'ワイド写真やパノラマを取り込み、完璧に並んだカルーセルスライドに分割。',
+      'features.collage.title': 'クリエイティブなコラージュキャンバス',
+      'features.collage.desc': 'キャンバス上で写真を自由に配置。レイアウト、位置、フレーミングを完全にコントロール。',
+      'features.ratio.title': 'すべてのプラットフォーム、すべての比率',
+      'features.ratio.desc': '主要なアスペクト比に対応。Instagram、X、TikTok、rednoteに最適化。',
+      'features.export.title': '高解像度エクスポート',
+      'features.export.desc': '直接共有またはカメラロールに最高画質で保存。',
+      'features.privacy.title': 'プライバシー最優先',
+      'features.privacy.desc': 'すべての処理はデバイス上で完結。写真が端末から出ることはありません。',
+      'footer.privacy': 'プライバシーポリシー',
+      'footer.terms': '利用規約',
+      'preview.1': 'SView\nSNS向けパノラマカルーセルとコラージュを作成',
+      'preview.2': 'シームレスなカルーセル\nクリエイティブなコラージュ\n自由なキャンバス',
+      'preview.3': '多彩なアスペクト比、\nあらゆるプラットフォームに対応',
+      'preview.4': 'スマートアシスタンス、\n簡単レイアウト',
+      'preview.5': '高解像度エクスポート、\n素早くシェア',
+      'preview.6': 'シンプルなツール、\n余計なものなし',
+      'preview.7': '作品を見せよう、\n物語を伝えよう'
+    },
+    ko: {
+      'nav.download': '다운로드',
+      'hero.tagline': '당신의 작품을 보여주세요\n당신의 이야기를 들려주세요',
+      'hero.subtitle': '사진 크롭 & 레이아웃 도구. 깔끔한 캐러셀과 콜라주를 만들어 SNS에 바로 공유하세요.',
+      'hero.cta': 'App Store에서 다운로드',
+      'features.heading': 'SView의 핵심 기능',
+      'features.carousel.title': '매끄러운 파노라마 캐러셀',
+      'features.carousel.desc': '와이드 사진과 파노라마를 가져와 완벽하게 정렬된 캐러셀 슬라이드로 분할합니다.',
+      'features.collage.title': '크리에이티브 콜라주 캔버스',
+      'features.collage.desc': '캔버스에서 사진을 자유롭게 배치하고 레이아웃, 위치, 프레이밍을 완전히 제어하세요.',
+      'features.ratio.title': '모든 플랫폼, 모든 비율',
+      'features.ratio.desc': '모든 주요 화면 비율 지원. Instagram, X, TikTok, rednote에 최적화.',
+      'features.export.title': '고해상도 내보내기',
+      'features.export.desc': '바로 공유하거나 최고 화질로 카메라 롤에 저장.',
+      'features.privacy.title': '개인정보 보호 우선',
+      'features.privacy.desc': '모든 처리는 기기에서 이루어집니다. 사진은 절대 휴대폰을 떠나지 않습니다.',
+      'footer.privacy': '개인정보 처리방침',
+      'footer.terms': '이용약관',
+      'preview.1': 'SView\nSNS용 파노라마 캐러셀과 콜라주 제작',
+      'preview.2': '매끄러운 캐러셀\n크리에이티브 콜라주\n자유로운 캔버스',
+      'preview.3': '다양한 화면 비율,\n모든 플랫폼에 대응',
+      'preview.4': '스마트 보조,\n쉬운 레이아웃',
+      'preview.5': '고해상도 내보내기,\n빠른 공유',
+      'preview.6': '심플한 도구,\n군더더기 없이',
+      'preview.7': '작품을 보여주세요,\n이야기를 들려주세요'
+    },
+    es: {
+      'nav.download': 'Descargar',
+      'hero.tagline': 'Muestra tu trabajo\nCuenta tu historia',
+      'hero.subtitle': 'Una herramienta de recorte y maquetación de fotos para crear carruseles y collages en redes sociales.',
+      'hero.cta': 'Descargar en la App Store',
+      'features.heading': 'Por qué SView',
+      'features.carousel.title': 'Carruseles panorámicos perfectos',
+      'features.carousel.desc': 'Importa fotos panorámicas y SView las divide en slides perfectamente alineados.',
+      'features.collage.title': 'Lienzo creativo para collages',
+      'features.collage.desc': 'Organiza fotos libremente en un lienzo con control total sobre diseño, posición y encuadre.',
+      'features.ratio.title': 'Todas las plataformas, todas las proporciones',
+      'features.ratio.desc': 'Todas las proporciones principales. Optimizado para Instagram, X, TikTok y rednote.',
+      'features.export.title': 'Exportación en alta resolución',
+      'features.export.desc': 'Comparte directamente o guarda en el Carrete con la máxima calidad.',
+      'features.privacy.title': 'Privacidad ante todo',
+      'features.privacy.desc': 'Todo el procesamiento ocurre en el dispositivo. Tus fotos nunca salen de tu teléfono.',
+      'footer.privacy': 'Política de privacidad',
+      'footer.terms': 'Condiciones de uso',
+      'preview.1': 'SView\nCrea carruseles panorámicos y collages para redes sociales',
+      'preview.2': 'Carruseles perfectos\nCollages creativos\nUn lienzo libre',
+      'preview.3': 'Múltiples proporciones,\nListo para cada plataforma',
+      'preview.4': 'Asistencia inteligente,\nDiseño fácil',
+      'preview.5': 'Exportación en alta resolución,\nCompartir rápido',
+      'preview.6': 'Herramientas simples,\nNada de más',
+      'preview.7': 'Muestra tu trabajo,\nCuenta tu historia'
+    }
+  };
+
+  const langLabels = { en: 'EN', zh: '简中', 'zh-Hant': '繁中', ja: 'JA', ko: 'KO', es: 'ES' };
+  const cjkLangs = new Set(['zh', 'zh-Hant', 'ja', 'ko']);
+  let currentLang = 'en';
+
+  function setLanguage(lang) {
+    if (!T[lang]) return;
+    currentLang = lang;
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : (lang === 'zh-Hant' ? 'zh-Hant' : lang);
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (T[lang][key]) {
+        if (el.tagName === 'A' || el.tagName === 'BUTTON') {
+          el.textContent = T[lang][key];
+        } else {
+          el.innerHTML = T[lang][key].replace(/\n/g, '<br>');
+        }
+      }
+    });
+    document.body.classList.toggle('lang-cjk', cjkLangs.has(lang));
+    document.getElementById('langBtn').textContent = langLabels[lang];
+    document.querySelectorAll('.lang-option').forEach(function(opt) {
+      opt.classList.toggle('active', opt.dataset.lang === lang);
+    });
+    try { localStorage.setItem('sview-lang', lang); } catch(e) {}
+  }
+
+  function detectLanguage() {
+    try { var s = localStorage.getItem('sview-lang'); if (s && T[s]) return s; } catch(e) {}
+    var n = (navigator.language || '').toLowerCase();
+    if (n.startsWith('zh')) {
+      if (n.includes('hant') || n.includes('tw') || n.includes('hk') || n.includes('mo')) return 'zh-Hant';
+      return 'zh';
+    }
+    if (n.startsWith('ja')) return 'ja';
+    if (n.startsWith('ko')) return 'ko';
+    if (n.startsWith('es')) return 'es';
+    return 'en';
+  }
+
+  // Language dropdown
+  var langBtn = document.getElementById('langBtn');
+  var langDropdown = document.getElementById('langDropdown');
+  langBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var isOpen = langDropdown.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', isOpen);
+  });
+  document.querySelectorAll('.lang-option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      setLanguage(this.dataset.lang);
+      langDropdown.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', function() {
+    langDropdown.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Nav scroll
+  var nav = document.querySelector('.nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Gallery horizontal wheel scroll with smooth easing
+  var gallery = document.getElementById('gallery');
+  var galleryThumb = document.getElementById('gallery-thumb');
+  var scrollTarget = 0;
+  var scrolling = false;
+  var scrollbarTimer = null;
+  function updateThumb() {
+    var maxScroll = gallery.scrollWidth - gallery.clientWidth;
+    if (maxScroll <= 0) return;
+    var ratio = gallery.scrollLeft / maxScroll;
+    var wrapWidth = galleryThumb.parentElement.offsetWidth;
+    var thumbW = Math.max(40, wrapWidth * (gallery.clientWidth / gallery.scrollWidth));
+    galleryThumb.style.width = thumbW + 'px';
+    galleryThumb.style.left = (ratio * (wrapWidth - thumbW)) + 'px';
+  }
+  function showScrollbar() {
+    gallery.classList.add('scrolling');
+    updateThumb();
+    clearTimeout(scrollbarTimer);
+    scrollbarTimer = setTimeout(function() { gallery.classList.remove('scrolling'); }, 1000);
+  }
+  gallery.addEventListener('scroll', showScrollbar, { passive: true });
+  gallery.addEventListener('wheel', function(e) {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (e.deltaY !== 0) {
+      e.preventDefault();
+      showScrollbar();
+      scrollTarget = gallery.scrollLeft + e.deltaY * 2.5;
+      if (!scrolling) {
+        scrolling = true;
+        (function smoothScroll() {
+          var diff = scrollTarget - gallery.scrollLeft;
+          if (Math.abs(diff) > 0.5) {
+            gallery.scrollLeft += diff * 0.15;
+            requestAnimationFrame(smoothScroll);
+          } else {
+            gallery.scrollLeft = scrollTarget;
+            scrolling = false;
+          }
+        })();
+      }
+    }
+  }, { passive: false });
+
+  // Scroll animations
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(function(el, i) {
+    el.style.transitionDelay = (i * 60) + 'ms';
+    observer.observe(el);
+  });
+
+  // Init
+  setLanguage(detectLanguage());
+})();
+</script>
 
 </body>
 </html>
