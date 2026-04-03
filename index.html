@@ -787,34 +787,19 @@
 })();
 </script>
 
-<!-- WeChat / in-app browser guide -->
-<script>
-(function() {
-  try {
-    var ua = navigator.userAgent || '';
-    if (!/MicroMessenger|WeChat|QQ\/|Weibo/i.test(ua)) return;
-    var guide = document.getElementById('wechat-guide');
-    if (!guide) return;
-    var links = document.querySelectorAll('.nav-download, .hero-cta');
-    for (var i = 0; i < links.length; i++) {
-      links[i].onclick = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        guide.classList.add('show');
-        return false;
-      };
-    }
-    guide.onclick = function() { guide.classList.remove('show'); };
-  } catch(err) {}
-})();
-</script>
-
-<!-- WeChat guide overlay -->
+<!-- WeChat guide: detect on load, show immediately -->
 <div class="wechat-guide" id="wechat-guide">
   <svg class="wechat-guide-arrow" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 32V8M20 8L10 18M20 8L30 18" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
   <div class="wechat-guide-text">点击右上角 ···<br>选择「在浏览器中打开」</div>
   <div class="wechat-guide-sub">轻触任意位置关闭</div>
 </div>
+<script>
+if (/MicroMessenger|WeChat/i.test(navigator.userAgent)) {
+  var g = document.getElementById('wechat-guide');
+  g.classList.add('show');
+  g.onclick = function() { g.classList.remove('show'); };
+}
+</script>
 
 </body>
 </html>
