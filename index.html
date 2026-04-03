@@ -251,7 +251,7 @@
       display: none;
       position: fixed; top: 12px; right: 12px;
       z-index: 9999;
-      background: #222; color: #fff;
+      background: rgba(0,0,0,0.65); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #fff;
       border-radius: 12px;
       padding: 14px 18px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.25);
@@ -783,8 +783,8 @@
 
 <!-- WeChat guide: detect on load, show immediately -->
 <div class="wechat-guide" id="wechat-guide">
-  <svg class="wechat-guide-arrow" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 32V8M20 8L10 18M20 8L30 18" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   <div class="wechat-guide-text">点击右上角 ··· 在浏览器中打开</div>
+  <svg class="wechat-guide-arrow" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 32V8M20 8L10 18M20 8L30 18" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <script>
 if (/MicroMessenger|WeChat/i.test(navigator.userAgent)) {
