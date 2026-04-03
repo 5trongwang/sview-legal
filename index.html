@@ -780,16 +780,20 @@
     observer.observe(el);
   });
 
-  // WeChat in-app browser detection
-  var isWeChat = /MicroMessenger/i.test(navigator.userAgent);
-  if (isWeChat) {
+  // WeChat / in-app browser detection
+  var ua = navigator.userAgent || '';
+  var isInApp = /MicroMessenger|WeChat|QQ\/|Weibo|MiuiBrowser/i.test(ua);
+  if (isInApp) {
     var guide = document.getElementById('wechat-guide');
-    document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(a) {
-      a.addEventListener('click', function(e) {
+    var links = document.querySelectorAll('a[href*="apple.com"]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         guide.classList.add('show');
+        return false;
       });
-    });
+    }
     guide.addEventListener('click', function() {
       guide.classList.remove('show');
     });
