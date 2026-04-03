@@ -780,27 +780,32 @@
     observer.observe(el);
   });
 
-  // WeChat / in-app browser detection
-  var ua = navigator.userAgent || '';
-  var isInApp = /MicroMessenger|WeChat|QQ\/|Weibo|MiuiBrowser/i.test(ua);
-  if (isInApp) {
+  // (WeChat handler moved to separate script below)
+
+  // Init
+  setLanguage(detectLanguage());
+})();
+</script>
+
+<!-- WeChat / in-app browser guide -->
+<script>
+(function() {
+  try {
+    var ua = navigator.userAgent || '';
+    if (!/MicroMessenger|WeChat|QQ\/|Weibo/i.test(ua)) return;
     var guide = document.getElementById('wechat-guide');
-    var links = document.querySelectorAll('a[href*="apple.com"]');
+    if (!guide) return;
+    var links = document.querySelectorAll('.nav-download, .hero-cta');
     for (var i = 0; i < links.length; i++) {
-      links[i].addEventListener('click', function(e) {
+      links[i].onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
         guide.classList.add('show');
         return false;
-      });
+      };
     }
-    guide.addEventListener('click', function() {
-      guide.classList.remove('show');
-    });
-  }
-
-  // Init
-  setLanguage(detectLanguage());
+    guide.onclick = function() { guide.classList.remove('show'); };
+  } catch(err) {}
 })();
 </script>
 
