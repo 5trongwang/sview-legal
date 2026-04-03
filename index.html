@@ -246,6 +246,36 @@
     .footer-email a:hover { color: var(--color-text-secondary); }
     .footer-copy { font-size: 13px; color: var(--color-text-muted); opacity: 0.7; }
 
+    /* ===== WECHAT GUIDE OVERLAY ===== */
+    .wechat-guide {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.75);
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      flex-direction: column; align-items: flex-end;
+      padding: 16px 20px;
+    }
+    .wechat-guide.show { display: flex; }
+    .wechat-guide-arrow {
+      width: 40px; height: 40px; margin-right: 10px; margin-bottom: 16px;
+      animation: wechat-bounce 1.2s ease-in-out infinite;
+    }
+    @keyframes wechat-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .wechat-guide-text {
+      color: #fff; font-size: 17px; font-weight: 600;
+      line-height: 1.6; text-align: right;
+      margin-right: 6px;
+    }
+    .wechat-guide-sub {
+      color: rgba(255,255,255,0.6); font-size: 14px;
+      text-align: center; margin-top: auto; margin-bottom: 40px;
+      align-self: center;
+    }
+
     /* ===== SCROLL ANIMATIONS ===== */
     .fade-in {
       opacity: 0; transform: translateY(18px);
@@ -750,10 +780,32 @@
     observer.observe(el);
   });
 
+  // WeChat in-app browser detection
+  var isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+  if (isWeChat) {
+    var guide = document.getElementById('wechat-guide');
+    document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        guide.classList.add('show');
+      });
+    });
+    guide.addEventListener('click', function() {
+      guide.classList.remove('show');
+    });
+  }
+
   // Init
   setLanguage(detectLanguage());
 })();
 </script>
+
+<!-- WeChat guide overlay -->
+<div class="wechat-guide" id="wechat-guide">
+  <svg class="wechat-guide-arrow" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 32V8M20 8L10 18M20 8L30 18" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="wechat-guide-text">点击右上角 ···<br>选择「在浏览器中打开」</div>
+  <div class="wechat-guide-sub">轻触任意位置关闭</div>
+</div>
 
 </body>
 </html>
