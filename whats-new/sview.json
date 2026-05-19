@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "lastUpdated": "2026-05-19T00:00:00Z",
+  "releases": [
+    {
+      "version": "1.1.0",
+      "date": "2026-05-19",
+      "images": [
+        "https://sviewapp.com/whats-new/v1.1.0/fonts-hero.svg"
+      ],
+      "i18n": {
+        "en": {
+          "title": "[Placeholder] Upload Your Own Fonts",
+          "subtitle": "Local font upload",
+          "body": "[Placeholder copy] Drag your favorite TTF / OTF files into the font panel and keep every frame uniquely yours. — Replace this text with the final marketing copy before launch."
+        },
+        "zh-Hans": {
+          "title": "[占位] 上传你自己的字体",
+          "subtitle": "本地字体上传",
+          "body": "[占位文案] 把你最爱的 TTF / OTF 字体文件拖入字体面板,让每一帧作品都保有专属个性。— 上线前替换为最终营销文案。"
+        },
+        "zh-Hant": {
+          "title": "[佔位] 上傳你自己的字體",
+          "subtitle": "本地字體上傳",
+          "body": "[佔位文案] 把你最愛的 TTF / OTF 字體檔案拖入字體面板,讓每一幀作品都保有專屬個性。— 上線前替換為最終行銷文案。"
+        },
+        "ja": {
+          "title": "[仮] 独自フォントをアップロード",
+          "subtitle": "ローカルフォントアップロード",
+          "body": "[仮文章] お気に入りの TTF / OTF フォントファイルをフォントパネルにドラッグして、すべての作品にあなただけの個性を。— 公開前に最終文言に差し替えてください。"
+        },
+        "ko": {
+          "title": "[자리표시자] 내 폰트 업로드",
+          "subtitle": "로컬 폰트 업로드",
+          "body": "[자리표시자 문구] 좋아하는 TTF / OTF 폰트 파일을 폰트 패널로 드래그해 모든 프레임에 나만의 개성을 담아보세요. — 출시 전에 최종 문구로 교체하세요."
+        },
+        "es": {
+          "title": "[Marcador] Sube tus propias fuentes",
+          "subtitle": "Carga de fuentes locales",
+          "body": "[Texto provisional] Arrastra tus archivos TTF / OTF favoritos al panel de fuentes y dale a cada cuadro un toque único. — Reemplazar con la copia final antes del lanzamiento."
+        }
+      }
+    }
+  ]
+}
