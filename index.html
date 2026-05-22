@@ -230,6 +230,8 @@
     .badge-tag.accent {
       background: var(--color-text); color: #fff; border-color: var(--color-text);
     }
+    /* HQ / UL spec icons (gradient SVG, matches in-app export chips) */
+    .badge-svg { height: 19px; width: auto; display: inline-block; vertical-align: middle; }
 
     /* ===== FOOTER ===== */
     footer {
@@ -354,7 +356,7 @@
         <div class="gallery-overlay"><p data-i18n="preview.1">SView<br>Create panoramic carousels and collages for social media</p></div>
       </div>
       <div class="gallery-item">
-        <picture><source srcset="assets/iphone/2.webp" type="image/webp"><img src="assets/iphone/2.png" alt="" loading="eager"></picture>
+        <img class="loc-shot" data-shot="2" src="assets/iphone/2-en.webp" alt="" loading="eager">
         <div class="gallery-overlay"><p data-i18n="preview.2">Seamless carousels<br>Creative collages<br>A free canvas</p></div>
       </div>
       <div class="gallery-item">
@@ -366,11 +368,11 @@
         <div class="gallery-overlay"><p data-i18n="preview.4">Smart assistance,<br>Easy layout</p></div>
       </div>
       <div class="gallery-item">
-        <picture><source srcset="assets/iphone/5.webp" type="image/webp"><img src="assets/iphone/5.png" alt="" loading="lazy"></picture>
+        <img class="loc-shot" data-shot="5" src="assets/iphone/5-en.webp" alt="" loading="lazy">
         <div class="gallery-overlay"><p data-i18n="preview.5">High-resolution export,<br>Fast sharing</p></div>
       </div>
       <div class="gallery-item">
-        <picture><source srcset="assets/iphone/6.webp" type="image/webp"><img src="assets/iphone/6.png" alt="" loading="lazy"></picture>
+        <img class="loc-shot" data-shot="6" src="assets/iphone/6-en.webp" alt="" loading="lazy">
         <div class="gallery-overlay"><p data-i18n="preview.6">Simple tools,<br>Nothing extra</p></div>
       </div>
       <div class="gallery-item">
@@ -418,8 +420,8 @@
     <div class="feature-title" data-i18n="features.export.title">High-Resolution Export</div>
     <div class="feature-desc" data-i18n="features.export.desc">Share directly or save to Camera Roll — in HQ or UL high resolution.</div>
     <div class="feature-badges">
-      <span class="badge-tag accent">HQ</span>
-      <span class="badge-tag accent">UL</span>
+      <img class="badge-svg" src="assets/SizeHQ.svg" alt="HQ" width="21" height="13">
+      <img class="badge-svg" src="assets/SizeUL.svg" alt="UL" width="21" height="13">
     </div>
   </div>
 
@@ -633,6 +635,10 @@
       }
     });
     document.body.classList.toggle('lang-cjk', cjkLangs.has(lang));
+    var shotV = (lang === 'zh') ? 'zh' : (lang === 'zh-Hant') ? 'zh-Hant' : 'en';
+    document.querySelectorAll('img.loc-shot').forEach(function(img) {
+      img.src = 'assets/iphone/' + img.getAttribute('data-shot') + '-' + shotV + '.webp';
+    });
     document.getElementById('langBtn').textContent = langLabels[lang];
     document.querySelectorAll('.lang-option').forEach(function(opt) {
       opt.classList.toggle('active', opt.dataset.lang === lang);
