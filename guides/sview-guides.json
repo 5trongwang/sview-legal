@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "lastUpdated": "2026-08-06",
+  "articles": [
+    {
+      "id": "slice-basics",
+      "rev": 1,
+      "kind": "article",
+      "anim": "slice",
+      "i18n": {
+        "en": {
+          "title": "Slices",
+          "summary": "How one canvas becomes a seamless carousel",
+          "body": "Your canvas is divided into equal-width sections called slices. On export, each slice becomes a separate image.\n\nPost them in order as a carousel and they line up edge to edge — swiping through feels like scrolling across one continuous picture.\n\nAnything you place can cross a slice boundary. It won't be cut in the editor; the split happens only at export, so you can compose freely and check the seams afterwards.\n\nUse the Views panel to change how many slices you have. Adding or removing slices from there only changes the background — your photos and text stay exactly where you put them."
+        },
+        "zh-Hans": {
+          "title": "切片",
+          "summary": "一张画布如何变成无缝轮播",
+          "body": "画布被等宽划分成若干「切片」。导出时，每一片会成为一张独立的图片。\n\n把它们按顺序发成轮播，相邻两张就能边对边接上——左右滑动时，看起来就是在浏览一整张连续的图。\n\n任何元素都可以跨切片摆放。编辑器里不会真的把它切开，切分只发生在导出那一刻，所以你可以放心构图，之后再检查接缝。\n\n在「视图」面板里可以增减切片数量。从那里改只影响背景，你已经摆好的照片和文字不会跟着动。"
+        }
+      }
+    },
+    {
+      "id": "photo-tray",
+      "rev": 1,
+      "kind": "article",
+      "anim": "tray-place",
+      "i18n": {
+        "en": {
+          "title": "Photo Tray",
+          "summary": "Stage several photos, then place them one by one",
+          "body": "When you import more than one photo at a time, they don't drop straight onto the canvas. They wait in the photo tray at the top of the screen.\n\nTap a thumbnail to place it on the canvas. Or press and hold it and drag — you can drop it anywhere you like, including straight onto an existing photo to replace that one.\n\nIt works in reverse too: press and hold a photo already on the canvas and drag it up into the tray to set it aside for later.\n\nThe tray is per-session scratch space. It isn't saved with your project, and anything still sitting in it when you leave the editor is discarded."
+        },
+        "zh-Hans": {
+          "title": "照片暂存栏",
+          "summary": "先把多张照片暂存，再逐张摆放",
+          "body": "一次导入多张照片时，它们不会直接落到画布上，而是先停在屏幕顶部的照片暂存栏里。\n\n点一下缩略图，就能把它放到画布上；也可以长按拖动，放到你想要的任意位置——包括直接拖到一张已有照片上，替换掉它。\n\n反向也成立：长按画布上的照片往上拖回暂存栏，就能先把它收起来，待会儿再用。\n\n暂存栏是本次编辑的临时空间，不随项目保存。退出编辑器时还留在里面的照片会被丢弃。"
+        }
+      }
+    },
+    {
+      "id": "drag-replace",
+      "rev": 1,
+      "kind": "article",
+      "i18n": {
+        "en": {
+          "title": "Swapping photos & selecting a cell",
+          "summary": "Long-press to swap; tap twice to reach one cell",
+          "body": "Press and hold a photo on the canvas until it lifts, then drag it onto another photo and let go. The two swap places.\n\nWhat swaps is the picture, not the layout: each keeps its own frame, size and crop. It's a way to try a different arrangement without redoing any of your composition.\n\nInside a grid or a frame, tap the object once to select it, then tap a single cell to select just that cell. From there you can replace, crop or clear that one photo without touching its neighbours.\n\nLocking an object protects its position and size only. You can still fill, replace or swap the photos inside a locked object — the layout you locked is exactly what stays put."
+        },
+        "zh-Hans": {
+          "title": "长按换图与二级选中",
+          "summary": "长按互换照片；点两次进入单格",
+          "body": "长按画布上的一张照片，等它浮起后拖到另一张上松手，两张就会互换。\n\n互换的是画面，不是版式：各自的边框、尺寸和裁切都原样保留。想换个排列试试时，不必重做任何构图。\n\n在网格或边框里，先点一下选中整个对象，再点某一格，就能单独选中那一格。之后的替换、裁切、清空都只作用于这一张，不影响相邻的格子。\n\n给对象上锁只锁住位置和尺寸。锁住之后照样可以填图、替换、互换里面的照片——你锁住的是版式，它就只保证版式不动。"
+        }
+      }
+    },
+    {
+      "id": "frame-style",
+      "rev": 1,
+      "kind": "article",
+      "i18n": {
+        "en": {
+          "title": "Frame styles",
+          "summary": "Change the look, orientation and ratio of a frame",
+          "body": "Select a frame and open Style. The two sliders set how thick the border sits above/below and left/right of the picture.\n\nThe orientation button flips the frame between landscape and portrait. Next to it, the ratio buttons jump straight to another aspect within the same family, and Variant switches between the sub-styles of that family.\n\nShadow and Opacity are separate tabs. Shadow gives you angle, offset, blur and strength; Opacity fades the whole object, frame included.\n\nEvery change is its own undo step, so you can back out one adjustment without losing the rest."
+        },
+        "zh-Hans": {
+          "title": "边框样式",
+          "summary": "改换边框的款式、朝向与比例",
+          "body": "选中一个边框后打开 Style。两个滑块分别控制画面上下、左右的边框厚度。\n\n朝向按钮在横幅和竖幅之间翻转。旁边的比例按钮可以直接跳到同一系列的其它画幅，Variant 则在该系列的子款式之间切换。\n\n投影和透明度是独立的标签页。投影可调角度、偏移、模糊和浓淡；透明度作用于整个对象，包括边框本身。\n\n每一次调整都是独立的一步撤销，所以可以只回退某一个改动，不影响其它。"
+        }
+      }
+    },
+    {
+      "id": "multi-select",
+      "rev": 1,
+      "kind": "article",
+      "i18n": {
+        "en": {
+          "title": "Multi-select & grouping",
+          "summary": "Move several objects as one",
+          "body": "Select an object, then tap multi-select in its quick action bar. Tap any other objects to add them to the group — photos and text can be mixed.\n\nA group behaves as a single rigid body: drag, pinch or rotate and everything moves together, keeping its relative arrangement. When you let go, the whole change lands as one undo step.\n\nDelete, duplicate and lock apply to the whole group the same way — again, one step.\n\nIf any member is locked, the group's move and resize gestures are disabled. Unlock that member, or drop it from the group, to move the rest.\n\nTap an empty area of the canvas to leave multi-select."
+        },
+        "zh-Hans": {
+          "title": "多选与编组",
+          "summary": "把多个对象当成一个来操作",
+          "body": "先选中一个对象，在它的快捷栏里点「多选」，再依次点其它对象把它们加进来——照片和文字可以混选。\n\n编组之后整体表现得像一个刚体：拖动、缩放、旋转都是一起动，相对位置保持不变。松手时整个变化记为一步撤销。\n\n删除、复制、上锁同样作用于整组，也同样只占一步。\n\n只要组里有任何一个成员被锁住，整组的移动与缩放手势就会被禁用。解锁那个成员，或把它移出编组，其余的才能继续动。\n\n点击画布空白处即可退出多选。"
+        }
+      }
+    }
+  ]
+}
