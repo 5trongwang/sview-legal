@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-08-06",
+  "lastUpdated": "2026-08-12",
   "articles": [
     {
       "id": "slice-basics",
-      "rev": 1,
+      "rev": 2,
       "kind": "article",
       "anim": "slice",
       "i18n": {
@@ -17,12 +17,71 @@
           "title": "切片",
           "summary": "一张画布如何变成无缝轮播",
           "body": "画布被等宽划分成若干「切片」。导出时，每一片会成为一张独立的图片。\n\n把它们按顺序发成轮播，相邻两张就能边对边接上——左右滑动时，看起来就是在浏览一整张连续的图。\n\n任何元素都可以跨切片摆放。编辑器里不会真的把它切开，切分只发生在导出那一刻，所以你可以放心构图，之后再检查接缝。\n\n在「视图」面板里可以增减切片数量。从那里改只影响背景，你已经摆好的照片和文字不会跟着动。"
+        },
+        "zh-Hant": {
+          "title": "切片",
+          "summary": "一張畫布如何變成無縫輪播",
+          "body": "畫布會被等寬劃分成多個「切片」。匯出時，每個切片都會成為一張獨立圖片。\n\n依序將它們發佈為輪播，相鄰圖片就會首尾相接——左右滑動時，就像在瀏覽一張連續的長圖。\n\n任何物件都可以跨越切片邊界擺放。編輯器不會真的把物件切開，分割只會在匯出時發生，因此你可以自由構圖，完成後再檢查接縫。\n\n你可以在「視圖」面板增減切片數量。從這裡調整只會改變背景，已經放好的照片與文字會留在原位。"
+        },
+        "ja": {
+          "title": "スライス",
+          "summary": "1枚のキャンバスからシームレスなカルーセルを作る仕組み",
+          "body": "キャンバスは同じ幅の「スライス」に分かれています。書き出すと、各スライスが1枚ずつの画像になります。\n\n順番どおりにカルーセルとして投稿すると、隣り合う画像が端でつながり、左右にスワイプするだけで1枚の連続した画像のように見えます。\n\n写真やテキストなどのオブジェクトは、スライスの境界をまたいで配置できます。エディタ内では分割されず、書き出すときだけ画像が分かれるため、自由にレイアウトしてからつなぎ目を確認できます。\n\nスライス数は「表示」パネルで変更できます。ここで追加や削除をしても変わるのは背景だけで、配置済みの写真やテキストは元の位置に残ります。"
+        },
+        "ko": {
+          "title": "슬라이스",
+          "summary": "하나의 캔버스로 매끄러운 캐러셀을 만드는 방식",
+          "body": "캔버스는 같은 너비의 ‘슬라이스’로 나뉩니다. 내보내면 각 슬라이스가 한 장의 이미지가 됩니다.\n\n순서대로 캐러셀에 게시하면 이웃한 이미지의 가장자리가 이어져, 좌우로 넘길 때 하나의 연속된 이미지처럼 보여요.\n\n사진이나 텍스트 같은 개체는 슬라이스 경계를 가로질러 배치할 수 있습니다. 편집기에서는 잘리지 않고 내보낼 때만 나뉘므로 자유롭게 구성한 뒤 연결 부분을 확인하세요.\n\n‘보기’ 패널에서 슬라이스 수를 늘리거나 줄일 수 있습니다. 여기서 수를 바꿔도 배경만 변경되며, 이미 배치한 사진과 텍스트는 원래 위치에 그대로 남습니다."
+        },
+        "es": {
+          "title": "Slices",
+          "summary": "Cómo un lienzo se convierte en un carrusel continuo",
+          "body": "El lienzo se divide en secciones del mismo ancho llamadas slices. Al exportar, cada slice se convierte en una imagen independiente.\n\nPublícalas en orden como un carrusel y sus bordes encajarán. Al deslizar entre ellas, parecerá una sola imagen continua.\n\nPuedes colocar cualquier objeto sobre el límite entre dos slices. No se corta dentro del editor: la división solo se aplica al exportar, así que puedes componer con libertad y revisar después las uniones.\n\nUsa el panel Vistas para cambiar el número de slices. Añadir o quitar slices desde allí solo modifica el fondo; las fotos y el texto que ya colocaste permanecen en su sitio."
+        }
+      }
+    },
+    {
+      "id": "slice-sort",
+      "rev": 1,
+      "kind": "article",
+      "anim": "slice-sort",
+      "minAppVersion": "1.2.0",
+      "i18n": {
+        "en": {
+          "title": "Reorder and edit slices",
+          "summary": "Drag slices into order or use their structure menu",
+          "body": "Tap Views in the bottom toolbar to enter slice sorting. The canvas zooms out and each slice gets a drag handle and a menu button.\n\nDrag a handle to move that slice to a new position. Objects belonging to that slice travel with it, including artwork that crosses into a neighbouring slice.\n\nOpen the ••• menu to add a slice on either side, duplicate it, move it left or right, or delete it. The delete item also tells you how many objects belong to that slice.\n\nClose Views when you are done. The canvas returns to the zoom and position you were using before sorting."
+        },
+        "zh-Hans": {
+          "title": "排序与编辑切片",
+          "summary": "拖拽换序，或用菜单调整切片结构",
+          "body": "点击底部工具栏的「视图」即可进入切片排序。画布会缩小，每一片下方会出现拖拽把手和菜单按钮。\n\n拖动把手，可把这一片换到新的位置。归属于该切片的对象会随它一起移动，包括跨到相邻切片上的内容。\n\n打开「•••」菜单，可以在左右添加切片、复制、向左或向右移动，也可以删除。删除项还会告诉你有多少对象属于这一片。\n\n完成后关闭「视图」，画布会回到进入排序前的缩放与位置。"
+        },
+        "zh-Hant": {
+          "title": "排序與編輯切片",
+          "summary": "拖曳換序，或用選單調整切片結構",
+          "body": "點擊底部工具列的「視圖」即可進入切片排序。畫布會縮小，每一片下方會出現拖曳把手和選單按鈕。\n\n拖動把手，可把這一片換到新的位置。屬於該切片的物件會隨它一起移動，包括跨到相鄰切片上的內容。\n\n打開「•••」選單，可以在左右新增切片、複製、向左或向右移動，也可以刪除。刪除項還會告訴你有多少物件屬於這一片。\n\n完成後關閉「視圖」，畫布會回到進入排序前的縮放與位置。"
+        },
+        "ja": {
+          "title": "スライスの並べ替えと編集",
+          "summary": "ドラッグで並べ替え、メニューで構成を変更",
+          "body": "下部ツールバーの「表示」をタップすると、スライスの並べ替えに入ります。キャンバスが縮小し、各スライスの下にドラッグハンドルとメニューボタンが表示されます。\n\nハンドルをドラッグすると、そのスライスを新しい位置へ移動できます。そのスライスに属するオブジェクトは、隣のスライスにはみ出した部分も含めて一緒に移動します。\n\n「•••」メニューでは、左右へのスライス追加、複製、左右移動、削除ができます。削除項目には、そのスライスに属するオブジェクト数も表示されます。\n\n終わったら「表示」を閉じます。キャンバスは並べ替え前のズームと位置に戻ります。"
+        },
+        "ko": {
+          "title": "슬라이스 순서 및 구조 편집",
+          "summary": "드래그로 순서를 바꾸고 메뉴로 구조를 조정해요",
+          "body": "아래 도구 막대에서 ‘보기’를 탭하면 슬라이스 정렬 모드가 열립니다. 캔버스가 축소되고 각 슬라이스 아래에 드래그 핸들과 메뉴 버튼이 나타납니다.\n\n핸들을 드래그해 슬라이스를 새 위치로 옮길 수 있어요. 해당 슬라이스에 속한 개체는 이웃 슬라이스로 걸친 부분까지 함께 이동합니다.\n\n‘•••’ 메뉴에서는 왼쪽이나 오른쪽에 슬라이스 추가, 복제, 좌우 이동, 삭제를 할 수 있어요. 삭제 항목에는 해당 슬라이스에 속한 개체 수도 표시됩니다.\n\n완료되면 ‘보기’를 닫으세요. 캔버스가 정렬 전의 확대 비율과 위치로 돌아갑니다."
+        },
+        "es": {
+          "title": "Ordenar y editar slices",
+          "summary": "Arrastra para ordenar o usa el menú de estructura",
+          "body": "Toca Vistas en la barra inferior para ordenar los slices. El lienzo se aleja y cada slice muestra un tirador y un botón de menú.\n\nArrastra el tirador para mover ese slice a otra posición. Los objetos que pertenecen a ese slice viajan con él, incluso el contenido que cruza hacia un slice vecino.\n\nAbre el menú «•••» para añadir un slice a cualquiera de los lados, duplicarlo, moverlo a izquierda o derecha, o eliminarlo. La opción de eliminar también indica cuántos objetos pertenecen a ese slice.\n\nCierra Vistas al terminar. El lienzo recuperará el zoom y la posición anteriores."
         }
       }
     },
     {
       "id": "photo-tray",
-      "rev": 1,
+      "rev": 2,
       "kind": "article",
       "anim": "tray-place",
       "i18n": {
@@ -35,57 +94,140 @@
           "title": "照片暂存栏",
           "summary": "先把多张照片暂存，再逐张摆放",
           "body": "一次导入多张照片时，它们不会直接落到画布上，而是先停在屏幕顶部的照片暂存栏里。\n\n点一下缩略图，就能把它放到画布上；也可以长按拖动，放到你想要的任意位置——包括直接拖到一张已有照片上，替换掉它。\n\n反向也成立：长按画布上的照片往上拖回暂存栏，就能先把它收起来，待会儿再用。\n\n暂存栏是本次编辑的临时空间，不随项目保存。退出编辑器时还留在里面的照片会被丢弃。"
+        },
+        "zh-Hant": {
+          "title": "照片暫存列",
+          "summary": "先暫存多張照片，再逐張放到畫布",
+          "body": "一次匯入多張照片時，它們不會直接放到畫布，而是先停在畫面頂端的照片暫存列。\n\n點一下縮圖即可將照片放到畫布；也可以長按並拖曳到想要的位置，包括直接放到現有照片上進行替換。\n\n反向操作也可以：長按畫布上的照片並向上拖回暫存列，就能先收起來，稍後再使用。\n\n暫存列是本次編輯的臨時空間，不會隨專案儲存。離開編輯器時，仍留在暫存列的照片會被捨棄。"
+        },
+        "ja": {
+          "title": "フォトトレイ",
+          "summary": "複数の写真を一時的に置き、1枚ずつ配置",
+          "body": "複数の写真をまとめて読み込むと、写真はすぐにキャンバスへ置かれず、画面上部のフォトトレイに一時保存されます。\n\nサムネイルをタップするとキャンバスに配置できます。長押ししてドラッグすれば好きな位置に置けるほか、既存の写真へ直接ドロップして入れ替えることもできます。\n\n逆の操作もできます。キャンバス上の写真を長押しし、上へドラッグしてフォトトレイに戻すと、あとで使うために一時的に取っておけます。\n\nフォトトレイは現在の編集セッションだけで使う一時領域です。プロジェクトには保存されず、エディタを閉じたときに残っている写真は破棄されます。"
+        },
+        "ko": {
+          "title": "사진 보관함",
+          "summary": "여러 사진을 잠시 보관한 뒤 한 장씩 배치해요",
+          "body": "여러 사진을 한 번에 가져오면 캔버스에 바로 놓이지 않고 화면 위쪽의 사진 보관함에 잠시 머뭅니다.\n\n썸네일을 탭하면 캔버스에 놓을 수 있어요. 길게 눌러 드래그하면 원하는 위치에 놓을 수 있고, 기존 사진 위에 바로 놓아 교체할 수도 있습니다.\n\n반대로도 가능합니다. 캔버스의 사진을 길게 누른 뒤 위쪽 사진 보관함으로 드래그하면 나중에 사용하도록 잠시 보관할 수 있어요.\n\n사진 보관함은 현재 편집 세션에서만 쓰는 임시 공간입니다. 프로젝트에 저장되지 않으며, 편집기를 나갈 때 보관함에 남아 있는 사진은 삭제됩니다."
+        },
+        "es": {
+          "title": "Bandeja de fotos",
+          "summary": "Guarda varias fotos temporalmente y colócalas una a una",
+          "body": "Cuando importas varias fotos a la vez, no se colocan directamente en el lienzo. Primero quedan en la bandeja de fotos, en la parte superior de la pantalla.\n\nToca una miniatura para colocarla en el lienzo. También puedes mantenerla pulsada y arrastrarla hasta cualquier posición, incluso sobre una foto existente para sustituirla.\n\nTambién funciona al revés: mantén pulsada una foto del lienzo y arrástrala hacia arriba, hasta la bandeja, para guardarla y usarla más tarde.\n\nLa bandeja es un espacio temporal de la sesión de edición. No se guarda con el proyecto y las fotos que queden allí al salir del editor se descartarán."
         }
       }
     },
     {
       "id": "drag-replace",
-      "rev": 1,
+      "rev": 4,
       "kind": "article",
+      "anim": "drag-replace",
       "i18n": {
         "en": {
-          "title": "Swapping photos & selecting a cell",
-          "summary": "Long-press to swap; tap twice to reach one cell",
-          "body": "Press and hold a photo on the canvas until it lifts, then drag it onto another photo and let go. The two swap places.\n\nWhat swaps is the picture, not the layout: each keeps its own frame, size and crop. It's a way to try a different arrangement without redoing any of your composition.\n\nInside a grid or a frame, tap the object once to select it, then tap a single cell to select just that cell. From there you can replace, crop or clear that one photo without touching its neighbours.\n\nLocking an object protects its position and size only. You can still fill, replace or swap the photos inside a locked object — the layout you locked is exactly what stays put."
+          "title": "Swap or fill photos",
+          "summary": "Long-press a photo, then drop it on another photo or into a Frame or Grid",
+          "body": "Press and hold a photo until it lifts. Drop it on another photo to swap the pictures; each keeps its own size, layout and crop.\n\nYou can also drop it into a Frame or Grid cell. An empty cell receives the photo, while a filled cell swaps pictures with the source."
         },
         "zh-Hans": {
-          "title": "长按换图与二级选中",
-          "summary": "长按互换照片；点两次进入单格",
-          "body": "长按画布上的一张照片，等它浮起后拖到另一张上松手，两张就会互换。\n\n互换的是画面，不是版式：各自的边框、尺寸和裁切都原样保留。想换个排列试试时，不必重做任何构图。\n\n在网格或边框里，先点一下选中整个对象，再点某一格，就能单独选中那一格。之后的替换、裁切、清空都只作用于这一张，不影响相邻的格子。\n\n给对象上锁只锁住位置和尺寸。锁住之后照样可以填图、替换、互换里面的照片——你锁住的是版式，它就只保证版式不动。"
+          "title": "长按互换或填充照片",
+          "summary": "长按照片，再拖到另一张照片、边框或网格中",
+          "body": "长按照片，等它浮起后拖到另一张照片上松手，两边的画面就会互换；各自的尺寸、版式和裁切保持不变。\n\n也可以把浮起的照片拖入边框或网格的单格。空格会接收照片，已有照片的格子则与来源互换。"
+        },
+        "zh-Hant": {
+          "title": "長按互換或填入照片",
+          "summary": "長按照片，再拖到另一張照片、邊框或網格中",
+          "body": "長按照片，等它浮起後拖到另一張照片上放開，兩邊的畫面就會互換；各自的尺寸、版式和裁切保持不變。\n\n也可以把浮起的照片拖入邊框或網格的單格。空格會接收照片，已有照片的格子則與來源互換。"
+        },
+        "ja": {
+          "title": "写真を長押しして交換・配置",
+          "summary": "写真を長押しし、別の写真やフレーム、グリッドへドロップ",
+          "body": "写真を長押しして浮き上がったら、別の写真へドラッグして放します。画像だけが入れ替わり、それぞれのサイズ、レイアウト、切り抜きは保たれます。\n\n浮かせた写真はフレームやグリッドのセルにもドロップできます。空のセルには写真が入り、写真入りのセルとは画像が入れ替わります。"
+        },
+        "ko": {
+          "title": "길게 눌러 사진 교체 또는 채우기",
+          "summary": "사진을 길게 누른 뒤 다른 사진이나 프레임, 그리드에 놓아요",
+          "body": "사진을 길게 눌러 떠오르면 다른 사진 위로 드래그해 놓으세요. 사진만 서로 바뀌고 각 컨테이너의 크기, 레이아웃, 자르기는 그대로 유지됩니다.\n\n떠오른 사진을 프레임 또는 그리드 셀에 놓을 수도 있어요. 빈 셀에는 사진이 들어가고, 사진이 있는 셀과는 서로 교체됩니다."
+        },
+        "es": {
+          "title": "Intercambia o rellena fotos",
+          "summary": "Mantén pulsada una foto y suéltala sobre otra o dentro de un marco o una cuadrícula",
+          "body": "Mantén pulsada una foto hasta que se eleve y suéltala sobre otra. Solo se intercambian las imágenes; cada contenedor conserva su tamaño, composición y recorte.\n\nTambién puedes soltarla en una celda de un marco o una cuadrícula. Una celda vacía recibe la foto y una celda ocupada intercambia su imagen con el origen."
         }
       }
     },
     {
-      "id": "frame-style",
-      "rev": 1,
+      "id": "cell-selection",
+      "rev": 2,
       "kind": "article",
+      "anim": "cell-selection",
       "i18n": {
         "en": {
-          "title": "Frame styles",
-          "summary": "Change the look, orientation and ratio of a frame",
-          "body": "Select a frame and open Style. The two sliders set how thick the border sits above/below and left/right of the picture.\n\nThe orientation button flips the frame between landscape and portrait. Next to it, the ratio buttons jump straight to another aspect within the same family, and Variant switches between the sub-styles of that family.\n\nShadow and Opacity are separate tabs. Shadow gives you angle, offset, blur and strength; Opacity fades the whole object, frame included.\n\nEvery change is its own undo step, so you can back out one adjustment without losing the rest."
+          "title": "Select a photo inside a container",
+          "summary": "Select the Frame or Grid, then tap a photo again",
+          "body": "Frames and multi-cell Grids have two selection levels. Tap once to select the whole container; its white outline and resize handles appear.\n\nTap a photo inside the selected container again to select that photo. Its outline turns blue, and photo actions affect only that cell without changing its neighbours."
         },
         "zh-Hans": {
-          "title": "边框样式",
-          "summary": "改换边框的款式、朝向与比例",
-          "body": "选中一个边框后打开 Style。两个滑块分别控制画面上下、左右的边框厚度。\n\n朝向按钮在横幅和竖幅之间翻转。旁边的比例按钮可以直接跳到同一系列的其它画幅，Variant 则在该系列的子款式之间切换。\n\n投影和透明度是独立的标签页。投影可调角度、偏移、模糊和浓淡；透明度作用于整个对象，包括边框本身。\n\n每一次调整都是独立的一步撤销，所以可以只回退某一个改动，不影响其它。"
+          "title": "选中容器内的照片",
+          "summary": "先选中边框或网格，再点一次其中的照片",
+          "body": "边框和多格网格有两级选中。第一次点击会选中整个容器，并显示白色外框和缩放拉杆。\n\n再次点击已选容器内的一张照片，即可单独选中它。外框会变成蓝色，之后的照片操作只作用于这一格，不影响相邻内容。"
+        },
+        "zh-Hant": {
+          "title": "選取容器內的照片",
+          "summary": "先選取邊框或網格，再點一次其中的照片",
+          "body": "邊框和多格網格有兩級選取。第一次點擊會選取整個容器，並顯示白色外框和縮放拉桿。\n\n再次點擊已選容器內的一張照片，即可單獨選取它。外框會變成藍色，之後的照片操作只作用於這一格，不影響相鄰內容。"
+        },
+        "ja": {
+          "title": "コンテナ内の写真を選択",
+          "summary": "フレームまたはグリッドを選び、中の写真をもう一度タップ",
+          "body": "フレームと複数セルのグリッドには2段階の選択があります。最初のタップでコンテナ全体が選択され、白い枠とサイズ変更ハンドルが表示されます。\n\n選択中のコンテナ内で写真をもう一度タップすると、その写真だけが選択されます。枠が青になり、その後の写真操作は隣のセルに影響しません。"
+        },
+        "ko": {
+          "title": "컨테이너 안의 사진 선택",
+          "summary": "프레임 또는 그리드를 선택한 뒤 안쪽 사진을 한 번 더 탭해요",
+          "body": "프레임과 여러 셀로 된 그리드에는 두 단계 선택이 있어요. 먼저 탭하면 컨테이너 전체가 선택되고 흰색 테두리와 크기 조절 핸들이 나타납니다.\n\n선택된 컨테이너 안의 사진을 다시 탭하면 그 사진만 선택됩니다. 테두리가 파란색으로 바뀌고 이후 사진 작업은 이웃 셀에 영향을 주지 않습니다."
+        },
+        "es": {
+          "title": "Selecciona una foto del contenedor",
+          "summary": "Selecciona el marco o la cuadrícula y vuelve a tocar una foto interior",
+          "body": "Los marcos y las cuadrículas de varias celdas tienen dos niveles de selección. El primer toque selecciona todo el contenedor y muestra su borde blanco y los tiradores.\n\nVuelve a tocar una foto dentro del contenedor seleccionado para elegir solo esa foto. El borde se vuelve azul y las acciones posteriores afectan únicamente a esa celda."
         }
       }
     },
     {
       "id": "multi-select",
-      "rev": 1,
+      "rev": 3,
       "kind": "article",
+      "anim": "multi-select",
       "i18n": {
         "en": {
           "title": "Multi-select & grouping",
           "summary": "Move several objects as one",
-          "body": "Select an object, then tap multi-select in its quick action bar. Tap any other objects to add them to the group — photos and text can be mixed.\n\nA group behaves as a single rigid body: drag, pinch or rotate and everything moves together, keeping its relative arrangement. When you let go, the whole change lands as one undo step.\n\nDelete, duplicate and lock apply to the whole group the same way — again, one step.\n\nIf any member is locked, the group's move and resize gestures are disabled. Unlock that member, or drop it from the group, to move the rest.\n\nTap an empty area of the canvas to leave multi-select."
+          "body": "Select an object, then tap multi-select in its quick action bar. Tap other objects to add them to the group — photos and text can be mixed.\n\nThe group behaves as one object: drag, resize or rotate it and every member moves together while keeping its relative position.\n\nDelete and duplicate also apply to the whole group.\n\nTap an empty area of the canvas to leave multi-select."
         },
         "zh-Hans": {
           "title": "多选与编组",
           "summary": "把多个对象当成一个来操作",
-          "body": "先选中一个对象，在它的快捷栏里点「多选」，再依次点其它对象把它们加进来——照片和文字可以混选。\n\n编组之后整体表现得像一个刚体：拖动、缩放、旋转都是一起动，相对位置保持不变。松手时整个变化记为一步撤销。\n\n删除、复制、上锁同样作用于整组，也同样只占一步。\n\n只要组里有任何一个成员被锁住，整组的移动与缩放手势就会被禁用。解锁那个成员，或把它移出编组，其余的才能继续动。\n\n点击画布空白处即可退出多选。"
+          "body": "先选中一个对象，在快捷栏里点「多选」，再依次点击其他对象加入编组。照片和文字可以一起选择。\n\n编组后，整组会像一个对象：拖动、缩放或旋转时，所有成员一起变化，并保持彼此的相对位置。\n\n删除和复制也会作用于整组。\n\n点击画布空白处即可退出多选。"
+        },
+        "zh-Hant": {
+          "title": "多選與群組",
+          "summary": "把多個物件當成一個操作",
+          "body": "先選取一個物件，在快捷列點擊「多選」，再依次點擊其他物件加入群組。照片和文字可以一起選取。\n\n組成群組後，整組會像一個物件：拖動、縮放或旋轉時，所有成員一起變化，並保持彼此的相對位置。\n\n刪除和複製也會作用於整組。\n\n點擊畫布空白處即可退出多選。"
+        },
+        "ja": {
+          "title": "複数選択とグループ化",
+          "summary": "複数のオブジェクトを1つとして操作",
+          "body": "オブジェクトを1つ選択し、クイックアクションバーの「複数選択」をタップします。続けてほかのオブジェクトをタップしてグループに追加します。写真とテキストを一緒に選択できます。\n\nグループ化すると、全体を1つのオブジェクトのようにドラッグ、拡大縮小、回転できます。各要素の相対位置は保たれます。\n\n削除と複製もグループ全体に適用されます。\n\nキャンバスの空白部分をタップすると複数選択を終了します。"
+        },
+        "ko": {
+          "title": "다중 선택 및 그룹화",
+          "summary": "여러 개체를 하나처럼 조작해요",
+          "body": "개체 하나를 선택하고 빠른 작업 막대에서 ‘다중 선택’을 탭하세요. 다른 개체를 차례로 탭해 그룹에 추가할 수 있으며 사진과 텍스트를 함께 선택할 수 있어요.\n\n그룹은 하나의 개체처럼 움직입니다. 드래그하거나 크기를 조절하고 회전하면 모든 항목이 상대 위치를 유지한 채 함께 움직여요.\n\n삭제와 복제도 그룹 전체에 적용됩니다.\n\n캔버스의 빈 곳을 탭하면 다중 선택이 종료됩니다."
+        },
+        "es": {
+          "title": "Selección múltiple y agrupación",
+          "summary": "Manipula varios objetos como uno solo",
+          "body": "Selecciona un objeto y toca Selección múltiple en su barra de acciones rápidas. Toca otros objetos para añadirlos al grupo; puedes mezclar fotos y texto.\n\nEl grupo se comporta como un solo objeto: al arrastrarlo, cambiar su tamaño o girarlo, todos los elementos se mueven juntos y conservan su posición relativa.\n\nEliminar y duplicar se aplican a todo el grupo.\n\nToca una zona vacía del lienzo para salir de la selección múltiple."
         }
       }
     }

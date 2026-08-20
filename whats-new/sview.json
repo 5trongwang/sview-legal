@@ -1,7 +1,103 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-05-22T00:00:00Z",
+  "lastUpdated": "2026-08-20T08:39:07Z",
   "releases": [
+    {
+      "version": "1.2.0",
+      "date": "2026-08-20",
+      "images": [
+        "https://sviewapp.com/whats-new/v1.2.0/frame-01.webp",
+        "https://sviewapp.com/whats-new/v1.2.0/frame-02.webp",
+        "https://sviewapp.com/whats-new/v1.2.0/frame-03.webp",
+        "https://sviewapp.com/whats-new/v1.2.0/frame-04.webp",
+        "https://sviewapp.com/whats-new/v1.2.0/frame-05.webp",
+        "https://sviewapp.com/whats-new/v1.2.0/frame-06.webp",
+        "https://sviewapp.com/whats-new/v1.2.0/tray-07.webp",
+        "https://sviewapp.com/whats-new/v1.2.0/tray-08.webp",
+        "https://sviewapp.com/whats-new/v1.2.0/tray-09.webp"
+      ],
+      "i18n": {
+        "en": {
+          "title": "Frame & Grid have landed",
+          "body": "Still using version 1.1? Update to 1.2.0 from the App Store.\n\nFrame & Grid\nFrame and Grid are now available. The Frame library includes familiar minimalist borders as well as a Film collection. Using a professional camera-scanning workflow, we digitized physical film to preserve its original texture and dimensions. Whether or not you shoot film, these frames can add a vintage feel or reflect your own visual style.\n\nA more efficient workflow\nWhen you import multiple photos, they’re collected in the Photo Tray instead of piling up on the canvas. Tap a thumbnail, or drag it directly to the canvas, a Frame, a Grid, or wherever you need it. You can move it back to the tray at any time, keeping the canvas clear and reducing distractions while you compose.\n\nHigh-resolution export\nWe’ve improved export quality to reduce compression loss. HD 2160px exports, three quality levels, and HEIC are available for free. For higher-resolution output, Pro includes Ultra HD 4032px.\n\nNote: At extreme aspect ratios, the long edge of each exported image is limited to 12,000px. SView adjusts automatically.",
+          "footer": "Still using version 1.1? Update to 1.2.0 from the App Store."
+        },
+        "zh-Hans": {
+          "title": "边框和网格现已上线",
+          "body": "若仍在使用 1.1，请前往 App Store 更新至 1.2.0。\n\n边框和网格\n边框和网格现已上线。边框素材库除了常用的极简边框，我们还特别推出了胶片系列。使用专业翻拍流程，数字化呈现实体胶片的真实质感和规格。不论你是不是胶片摄影爱好者，都可以用这些边框为作品增添复古氛围，或表达自己的审美。\n\n更高效的工作流\n一次导入多张照片时，它们会被收纳进照片暂存栏，而非堆积在画布上。你可以点击或直接拖拽小图到画布、边框、网格等任何地方；需要时，也能随时拖回暂存栏。画布保持整洁，构图也更少受到干扰。\n\n高分辨率导出\n我们优化了导出画质，减少压缩造成的损失。高清 2160px、三档画质和 HEIC 格式现可免费使用；如需更高分辨率，Pro 提供超清 4032px。\n\n注：极端比例下，单张导出图片的长边最高为 12,000px，SView 会自动适配。",
+          "footer": "若仍在使用 1.1，请前往 App Store 更新至 1.2.0。"
+        },
+        "zh-Hant": {
+          "title": "相框與網格現已上線",
+          "body": "若仍在使用 1.1，請前往 App Store 更新至 1.2.0。\n\n相框與網格\n相框與網格現已上線。相框素材庫除了常用的極簡邊框，也加入了底片系列。我們透過專業翻拍流程，將實體底片數位化，呈現底片原有的質感與規格。無論你是不是底片攝影愛好者，都可以用這些相框為作品增添復古氛圍，或表達自己的審美。\n\n更有效率的工作流程\n一次匯入多張照片時，它們會收納進照片暫存欄，而不是堆疊在畫布上。你可以點一下縮圖，或直接拖曳到畫布、相框、網格等任何位置；需要時，也能隨時拖回暫存欄。畫布能保持整潔，構圖時也更少受到干擾。\n\n高解析度匯出\n我們改善了匯出畫質，減少壓縮造成的損失。高畫質 2160px、三種畫質設定與 HEIC 格式現在都可免費使用；如需更高解析度，Pro 可選擇超高畫質 4032px。\n\n註：在極端長寬比下，每張匯出圖片的長邊上限為 12,000px，SView 會自動調整。",
+          "footer": "若仍在使用 1.1，請前往 App Store 更新至 1.2.0。"
+        },
+        "ja": {
+          "title": "フレームとグリッドが登場しました",
+          "body": "バージョン1.1をお使いの場合は、App Storeで1.2.0にアップデートしてください。\n\nフレームとグリッド\nフレームとグリッドが使えるようになりました。フレーム素材には、定番のミニマルなデザインに加え、フィルムシリーズも追加しました。実物のフィルムをプロの複写工程でデジタル化し、本来の質感や規格を再現しています。フィルム写真が好きな方も、そうでない方も、作品にレトロな雰囲気を加えたり、自分らしい表現に仕上げたりできます。\n\nより効率的なワークフロー\n複数の写真を一度に読み込むと、キャンバス上に重ならず、写真トレイにまとめて収まります。サムネイルをタップするか、キャンバス、フレーム、グリッドなど、好きな場所へ直接ドラッグできます。必要に応じて写真トレイへ戻せるので、キャンバスを整理したまま構図に集中できます。\n\n高解像度での書き出し\n書き出し画質を見直し、圧縮による劣化を抑えました。2160pxの高画質書き出し、3段階の画質設定、HEIC形式を無料で利用できます。さらに高い解像度が必要な場合は、Proで4032pxの超高画質を選べます。\n\n注：極端な縦横比では、1枚の書き出し画像の長辺は最大12,000pxです。SViewが自動で調整します。",
+          "footer": "バージョン1.1をお使いの場合は、App Storeで1.2.0にアップデートしてください。"
+        },
+        "ko": {
+          "title": "프레임과 그리드가 추가됐어요",
+          "body": "아직 1.1 버전을 사용 중이라면 App Store에서 1.2.0으로 업데이트해 주세요.\n\n프레임과 그리드\n프레임과 그리드를 이제 사용할 수 있어요. 프레임 라이브러리에는 자주 쓰는 미니멀 테두리와 함께 필름 시리즈를 추가했어요. 실제 필름을 전문적인 복사 촬영 방식으로 디지털화해 본래의 질감과 규격을 담았어요. 필름 사진을 즐기는 분이 아니어도 이 프레임으로 작품에 빈티지한 분위기를 더하거나 자신의 취향을 표현할 수 있어요.\n\n더 효율적인 워크플로\n여러 장의 사진을 한 번에 가져오면 캔버스 위에 쌓이지 않고 사진 트레이에 정리돼요. 썸네일을 탭하거나 캔버스, 프레임, 그리드 등 원하는 곳으로 바로 드래그할 수 있어요. 필요할 때는 언제든 사진 트레이로 다시 옮길 수 있어 캔버스를 깔끔하게 유지하고 구도를 잡을 때 방해를 줄여요.\n\n고해상도 내보내기\n내보내기 화질을 개선해 압축으로 인한 손실을 줄였어요. 고화질 2160px, 3단계 화질 설정, HEIC 형식을 무료로 사용할 수 있어요. 더 높은 해상도가 필요하다면 Pro에서 초고화질 4032px를 선택할 수 있어요.\n\n참고: 극단적인 화면 비율에서는 내보낸 이미지 한 장의 긴 변이 최대 12,000px로 제한돼요. SView가 자동으로 조정해요.",
+          "footer": "아직 1.1 버전을 사용 중이라면 App Store에서 1.2.0으로 업데이트해 주세요."
+        },
+        "es": {
+          "title": "Marcos y cuadrículas ya disponibles",
+          "body": "Si sigues usando la versión 1.1, actualiza a la versión 1.2.0 desde el App Store.\n\nMarcos y cuadrículas\nLos marcos y las cuadrículas ya están disponibles. La biblioteca de marcos incluye los bordes minimalistas habituales y una colección creada a partir de película fotográfica real. Hemos digitalizado la película mediante un proceso profesional de reproducción fotográfica para conservar su textura y dimensiones originales. Hagas o no fotografía analógica, puedes usar estos marcos para dar a tus trabajos un aire retro o reflejar tu propio estilo.\n\nUn flujo de trabajo más eficiente\nAl importar varias fotos a la vez, se guardan en la bandeja de fotos en lugar de apilarse en el lienzo. Toca una miniatura o arrástrala directamente al lienzo, a un marco, a una cuadrícula o a cualquier otra posición. También puedes devolverla a la bandeja cuando quieras, para mantener el lienzo ordenado y componer con menos distracciones.\n\nExportación en alta resolución\nHemos optimizado la calidad de exportación para reducir la pérdida por compresión. Las exportaciones HD a 2160px, los tres niveles de calidad y el formato HEIC se pueden usar de forma gratuita. Si necesitas más resolución, Pro permite exportar en Ultra HD a 4032px.\n\nNota: En proporciones extremas, el lado más largo de cada imagen exportada tiene un límite de 12.000px. SView ajusta el tamaño automáticamente.",
+          "footer": "Si sigues usando la versión 1.1, actualiza a la versión 1.2.0 desde el App Store."
+        }
+      },
+      "sections": [
+        {
+          "id": "frame-grid",
+          "images": [
+            "https://sviewapp.com/whats-new/v1.2.0/frame-01.webp",
+            "https://sviewapp.com/whats-new/v1.2.0/frame-02.webp",
+            "https://sviewapp.com/whats-new/v1.2.0/frame-03.webp",
+            "https://sviewapp.com/whats-new/v1.2.0/frame-04.webp",
+            "https://sviewapp.com/whats-new/v1.2.0/frame-05.webp",
+            "https://sviewapp.com/whats-new/v1.2.0/frame-06.webp"
+          ],
+          "i18n": {
+            "en": {"title": "Frame & Grid", "body": "Frame and Grid are now available. The Frame library includes familiar minimalist borders as well as a Film collection. Using a professional camera-scanning workflow, we digitized physical film to preserve its original texture and dimensions. Whether or not you shoot film, these frames can add a vintage feel or reflect your own visual style."},
+            "zh-Hans": {"title": "边框和网格", "body": "边框和网格现已上线。边框素材库除了常用的极简边框，我们还特别推出了胶片系列。使用专业翻拍流程，数字化呈现实体胶片的真实质感和规格。不论你是不是胶片摄影爱好者，都可以用这些边框为作品增添复古氛围，或表达自己的审美。"},
+            "zh-Hant": {"title": "相框與網格", "body": "相框與網格現已上線。相框素材庫除了常用的極簡邊框，也加入了底片系列。我們透過專業翻拍流程，將實體底片數位化，呈現底片原有的質感與規格。無論你是不是底片攝影愛好者，都可以用這些相框為作品增添復古氛圍，或表達自己的審美。"},
+            "ja": {"title": "フレームとグリッド", "body": "フレームとグリッドが使えるようになりました。フレーム素材には、定番のミニマルなデザインに加え、フィルムシリーズも追加しました。実物のフィルムをプロの複写工程でデジタル化し、本来の質感や規格を再現しています。フィルム写真が好きな方も、そうでない方も、作品にレトロな雰囲気を加えたり、自分らしい表現に仕上げたりできます。"},
+            "ko": {"title": "프레임과 그리드", "body": "프레임과 그리드를 이제 사용할 수 있어요. 프레임 라이브러리에는 자주 쓰는 미니멀 테두리와 함께 필름 시리즈를 추가했어요. 실제 필름을 전문적인 복사 촬영 방식으로 디지털화해 본래의 질감과 규격을 담았어요. 필름 사진을 즐기는 분이 아니어도 이 프레임으로 작품에 빈티지한 분위기를 더하거나 자신의 취향을 표현할 수 있어요."},
+            "es": {"title": "Marcos y cuadrículas", "body": "Los marcos y las cuadrículas ya están disponibles. La biblioteca de marcos incluye los bordes minimalistas habituales y una colección creada a partir de película fotográfica real. Hemos digitalizado la película mediante un proceso profesional de reproducción fotográfica para conservar su textura y dimensiones originales. Hagas o no fotografía analógica, puedes usar estos marcos para dar a tus trabajos un aire retro o reflejar tu propio estilo."}
+          }
+        },
+        {
+          "id": "photo-tray",
+          "images": [
+            "https://sviewapp.com/whats-new/v1.2.0/tray-07.webp",
+            "https://sviewapp.com/whats-new/v1.2.0/tray-08.webp",
+            "https://sviewapp.com/whats-new/v1.2.0/tray-09.webp"
+          ],
+          "i18n": {
+            "en": {"title": "A more efficient workflow", "body": "When you import multiple photos, they’re collected in the Photo Tray instead of piling up on the canvas. Tap a thumbnail, or drag it directly to the canvas, a Frame, a Grid, or wherever you need it. You can move it back to the tray at any time, keeping the canvas clear and reducing distractions while you compose."},
+            "zh-Hans": {"title": "更高效的工作流", "body": "一次导入多张照片时，它们会被收纳进照片暂存栏，而非堆积在画布上。你可以点击或直接拖拽小图到画布、边框、网格等任何地方；需要时，也能随时拖回暂存栏。画布保持整洁，构图也更少受到干扰。"},
+            "zh-Hant": {"title": "更有效率的工作流程", "body": "一次匯入多張照片時，它們會收納進照片暫存欄，而不是堆疊在畫布上。你可以點一下縮圖，或直接拖曳到畫布、相框、網格等任何位置；需要時，也能隨時拖回暫存欄。畫布能保持整潔，構圖時也更少受到干擾。"},
+            "ja": {"title": "より効率的なワークフロー", "body": "複数の写真を一度に読み込むと、キャンバス上に重ならず、写真トレイにまとめて収まります。サムネイルをタップするか、キャンバス、フレーム、グリッドなど、好きな場所へ直接ドラッグできます。必要に応じて写真トレイへ戻せるので、キャンバスを整理したまま構図に集中できます。"},
+            "ko": {"title": "더 효율적인 워크플로", "body": "여러 장의 사진을 한 번에 가져오면 캔버스 위에 쌓이지 않고 사진 트레이에 정리돼요. 썸네일을 탭하거나 캔버스, 프레임, 그리드 등 원하는 곳으로 바로 드래그할 수 있어요. 필요할 때는 언제든 사진 트레이로 다시 옮길 수 있어 캔버스를 깔끔하게 유지하고 구도를 잡을 때 방해를 줄여요."},
+            "es": {"title": "Un flujo de trabajo más eficiente", "body": "Al importar varias fotos a la vez, se guardan en la bandeja de fotos en lugar de apilarse en el lienzo. Toca una miniatura o arrástrala directamente al lienzo, a un marco, a una cuadrícula o a cualquier otra posición. También puedes devolverla a la bandeja cuando quieras, para mantener el lienzo ordenado y componer con menos distracciones."}
+          }
+        },
+        {
+          "id": "export",
+          "images": [],
+          "i18n": {
+            "en": {"title": "High-resolution export", "body": "We’ve improved export quality to reduce compression loss. HD 2160px exports, three quality levels, and HEIC are available for free. For higher-resolution output, Pro includes Ultra HD 4032px.", "note": "Note: At extreme aspect ratios, the long edge of each exported image is limited to 12,000px. SView adjusts automatically."},
+            "zh-Hans": {"title": "高分辨率导出", "body": "我们优化了导出画质，减少压缩造成的损失。高清 2160px、三档画质和 HEIC 格式现可免费使用；如需更高分辨率，Pro 提供超清 4032px。", "note": "注：极端比例下，单张导出图片的长边最高为 12,000px，SView 会自动适配。"},
+            "zh-Hant": {"title": "高解析度匯出", "body": "我們改善了匯出畫質，減少壓縮造成的損失。高畫質 2160px、三種畫質設定與 HEIC 格式現在都可免費使用；如需更高解析度，Pro 可選擇超高畫質 4032px。", "note": "註：在極端長寬比下，每張匯出圖片的長邊上限為 12,000px，SView 會自動調整。"},
+            "ja": {"title": "高解像度での書き出し", "body": "書き出し画質を見直し、圧縮による劣化を抑えました。2160pxの高画質書き出し、3段階の画質設定、HEIC形式を無料で利用できます。さらに高い解像度が必要な場合は、Proで4032pxの超高画質を選べます。", "note": "注：極端な縦横比では、1枚の書き出し画像の長辺は最大12,000pxです。SViewが自動で調整します。"},
+            "ko": {"title": "고해상도 내보내기", "body": "내보내기 화질을 개선해 압축으로 인한 손실을 줄였어요. 고화질 2160px, 3단계 화질 설정, HEIC 형식을 무료로 사용할 수 있어요. 더 높은 해상도가 필요하다면 Pro에서 초고화질 4032px를 선택할 수 있어요.", "note": "참고: 극단적인 화면 비율에서는 내보낸 이미지 한 장의 긴 변이 최대 12,000px로 제한돼요. SView가 자동으로 조정해요."},
+            "es": {"title": "Exportación en alta resolución", "body": "Hemos optimizado la calidad de exportación para reducir la pérdida por compresión. Las exportaciones HD a 2160px, los tres niveles de calidad y el formato HEIC se pueden usar de forma gratuita. Si necesitas más resolución, Pro permite exportar en Ultra HD a 4032px.", "note": "Nota: En proporciones extremas, el lado más largo de cada imagen exportada tiene un límite de 12.000px. SView ajusta el tamaño automáticamente."}
+          }
+        }
+      ]
+    },
     {
       "version": "1.1.0",
       "date": "2026-05-19",
