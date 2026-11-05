@@ -7,9 +7,10 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <meta name="description" content="A photo cropping and layout tool. Create seamless carousels and collage posts for social media.">
+  <meta name="description" content="A canvas for photos, videos and animated images. Create seamless carousels and collages, then share your work.">
+  <link rel="canonical" href="https://sviewapp.com/">
   <meta property="og:title" content="SView — Swipe Carousel Maker">
-  <meta property="og:description" content="A photo cropping and layout tool for social media.">
+  <meta property="og:description" content="A canvas for photos, videos and animated images. Create seamless carousels and collages, then share your work.">
   <meta property="og:image" content="https://sviewapp.com/assets/iphone/1.png">
   <meta property="og:url" content="https://sviewapp.com">
   <meta name="twitter:card" content="summary_large_image">
@@ -25,7 +26,7 @@
       --color-surface: #ffffff;
       --color-text: #111111;
       --color-text-secondary: #666666;
-      --color-text-muted: #999999;
+      --color-text-muted: #6b6b6b;
       --color-border: #e8e8e8;
       --color-rule: #e0e0e0;
       --color-accent: #000000;
@@ -63,7 +64,7 @@
       -webkit-backdrop-filter: blur(12px);
       border-bottom-color: rgba(0,0,0,0.06);
     }
-    .nav-logo img { height: 18px; width: auto; display: block; filter: brightness(0); }
+    .nav-logo img { height: 18px; width: auto; display: block; }
     .nav-right { display: flex; align-items: center; gap: 20px; }
 
     .lang-selector { position: relative; }
@@ -104,7 +105,11 @@
       overflow: hidden;
       box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 2px 16px rgba(0,0,0,0.06);
     }
-    .hero-icon svg { width: 100%; height: 100%; display: block; }
+    .hero-icon {
+      display: grid; place-items: center;
+      background: url("assets/brand/appLogoBackground.svg") center / cover no-repeat;
+    }
+    .hero-icon img { display: block; width: 92%; height: auto; }
 
     .hero-app-title {
       font-size: 13px;
@@ -126,6 +131,9 @@
       max-width: 460px; margin: 0 auto 32px; line-height: 1.5;
     }
 
+    .hero-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; padding: 0 20px; }
+    .hero-instagram { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 13px 24px; border: 1px solid #777; border-radius: 100px; color: var(--color-text); font-size: 16px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
+    .hero-instagram:hover { background: #efefec; }
     .hero-cta {
       display: inline-block;
       background: var(--color-accent); color: #fff;
@@ -230,8 +238,20 @@
     .badge-tag.accent {
       background: var(--color-text); color: #fff; border-color: var(--color-text);
     }
-    /* HQ / UL spec icons (gradient SVG, matches in-app export chips) */
-    .badge-svg { height: 19px; width: auto; display: inline-block; vertical-align: middle; }
+    .gallery-note { color: #666; font-size: 13px; margin: 10px 24px 18px; }
+    .specs { max-width: 760px; margin: 0 auto; padding: 0 24px 64px; }
+    .specs h2 { scroll-margin-top: 80px; font-family: var(--font-serif); font-size: 32px; font-weight: 500; margin-bottom: 24px; }
+    .specs h3 { font-size: 16px; margin: 24px 0 8px; }
+    .specs p { color: #555; font-size: 15px; }
+    .specs table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    .specs th, .specs td { padding: 12px 8px; text-align: left; border-bottom: 1px solid var(--color-rule); }
+    .specs th { font-weight: 600; }
+    .specs summary { cursor: pointer; padding: 16px 0; font-weight: 600; }
+    .specs details { border-bottom: 1px solid var(--color-rule); }
+    .specs details p { padding-bottom: 18px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #245cc5; outline-offset: 4px; }
+    .lang-btn, .lang-option { min-height: 44px; }
+    @media (max-width: 400px) { .specs h2 { font-size: 24px; } .specs th, .specs td { padding: 10px 4px; font-size: 12px; } }
 
     /* ===== FOOTER ===== */
     footer {
@@ -246,7 +266,7 @@
     .footer-email { margin-bottom: 16px; }
     .footer-email a { font-size: 14px; color: var(--color-text-muted); text-decoration: none; transition: color 0.2s; }
     .footer-email a:hover { color: var(--color-text-secondary); }
-    .footer-copy { font-size: 13px; color: var(--color-text-muted); opacity: 0.7; }
+    .footer-copy { font-size: 13px; color: var(--color-text-muted); opacity: 1; }
 
     /* ===== WECHAT GUIDE ===== */
     .wechat-guide {
@@ -298,6 +318,7 @@
       .hero-icon { width: 72px; height: 72px; margin-bottom: 14px; }
       .hero-app-title { font-size: 12px; margin-bottom: 20px; }
       .hero-subtitle { font-size: 15px; margin-bottom: 28px; }
+      .hero-instagram { min-height: 44px; padding: 10px 20px; font-size: 14px; }
       .hero-cta { padding: 11px 28px; font-size: 14px; }
 
       .gallery { margin-top: 48px; padding-bottom: 16px; }
@@ -316,11 +337,12 @@
   </style>
 </head>
 <body>
+<main>
 
 <!-- NAV -->
 <nav class="nav" role="navigation">
   <a href="/" class="nav-logo" aria-label="SView Home">
-    <img src="assets/logo.svg" alt="SView">
+    <img src="assets/brand/iconLogo_V3.svg" alt="SView">
   </a>
   <div class="nav-right">
     <div class="lang-selector">
@@ -334,20 +356,22 @@
         <button class="lang-option" data-lang="es" role="menuitem">Español</button>
       </div>
     </div>
-    <a class="nav-download" href="https://apps.apple.com/app/sview/id6759950270" target="_blank" data-i18n="nav.download">Download</a>
+    <a class="nav-download" href="https://apps.apple.com/app/sview-swipe-carousel-maker/id6759950270" target="_blank" rel="noopener noreferrer" data-i18n="nav.download">Download</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-icon fade-in">
-    <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" fill="#EDEDED"/><path d="M102.68 166H170.746L182.758 346H114.691L102.68 166Z" fill="black"/><path d="M269.672 166H337.738L349.75 346H281.684L269.672 166Z" fill="black"/><path d="M261.859 166H193.793L181.781 346H249.848L261.859 166Z" fill="black"/><path d="M94.5763 166H25.3442L6 211L32.4711 301L13.1268 346H82.3589L101.703 301L75.232 211L94.5763 166Z" fill="black"/><path d="M345.844 166H414.74L426.898 346H358.002L345.844 166Z" fill="black"/><path d="M506 166H438.764L426.898 346H494.135L506 166Z" fill="black"/></svg>
+    <img src="assets/brand/appLogoIcon_V3.svg" alt="" width="79" height="29">
   </div>
   <div class="hero-app-title fade-in">SView &ndash; Swipe Carousel Maker</div>
   <h1 class="hero-tagline fade-in" data-i18n="hero.tagline">Show your work<br>Tell your story</h1>
-  <p class="hero-subtitle fade-in" data-i18n="hero.subtitle">A photo cropping &amp; layout tool for creating seamless carousels and collages on social media.</p>
-  <a class="hero-cta fade-in" href="https://apps.apple.com/app/sview/id6759950270" target="_blank"><span data-i18n="hero.cta">Download on the App Store</span></a>
-
+  <p class="hero-subtitle fade-in" data-i18n="hero.subtitle">A canvas for photos, videos and animated images. Create seamless carousels and collages, then share your work.</p>
+  <div class="hero-actions fade-in">
+  <a class="hero-cta" href="https://apps.apple.com/app/sview-swipe-carousel-maker/id6759950270" target="_blank" rel="noopener noreferrer"><span data-i18n="hero.cta">Download on the App Store</span></a>
+    <a class="hero-instagram" href="https://www.instagram.com/sview.app/" target="_blank" rel="noopener noreferrer" data-i18n="hero.instagram">Follow on Instagram</a>
+  </div>
   <!-- GALLERY -->
   <div class="gallery fade-in" id="gallery" role="region" aria-label="App screenshots" tabindex="0">
     <div class="gallery-track">
@@ -368,10 +392,6 @@
         <div class="gallery-overlay"><p data-i18n="preview.4">Smart assistance,<br>Easy layout</p></div>
       </div>
       <div class="gallery-item">
-        <picture><source srcset="assets/iphone/5.webp" type="image/webp"><img src="assets/iphone/5.png" alt="" loading="lazy"></picture>
-        <div class="gallery-overlay"><p data-i18n="preview.5">High-resolution export,<br>Fast sharing</p></div>
-      </div>
-      <div class="gallery-item">
         <picture><source srcset="assets/iphone/6.webp" type="image/webp"><img src="assets/iphone/6.png" alt="" loading="lazy"></picture>
         <div class="gallery-overlay"><p data-i18n="preview.6">Simple tools,<br>Nothing extra</p></div>
       </div>
@@ -381,12 +401,16 @@
       </div>
     </div>
   </div>
+  <p class="gallery-note" data-i18n="gallery.note">Screenshots are from an earlier version; the interface may differ.</p>
   <div class="gallery-scrollbar-wrap"><div class="gallery-scrollbar-thumb" id="gallery-thumb"></div></div>
 </section>
 
 <!-- FEATURES -->
 <section class="features">
   <h2 class="features-heading fade-in" data-i18n="features.heading">Why SView</h2>
+<div class="feature-item fade-in"><div class="feature-title" data-i18n="features.video.title">Share work that moves</div><div class="feature-desc" data-i18n="features.video.desc">Import videos, GIFs, APNGs and animated WebP directly onto the canvas. Arrange and edit them, then export MP4 videos for easy sharing.</div></div>
+<div class="feature-item fade-in"><div class="feature-title" data-i18n="features.modes.title">Three ways to show your work</div><div class="feature-desc" data-i18n="features.modes.desc">Carousel exports separate pages. Scroll moves continuously across the canvas; Slide turns the pages at your chosen interval.</div></div>
+
 
   <div class="feature-item fade-in">
     <div class="feature-title" data-i18n="features.carousel.title">Seamless Panoramic Carousels</div>
@@ -395,7 +419,7 @@
 
   <div class="feature-item fade-in">
     <div class="feature-title" data-i18n="features.collage.title">Creative Collage Canvas</div>
-    <div class="feature-desc" data-i18n="features.collage.desc">Arrange photos freely on a canvas with full control over layout, position, and framing.</div>
+    <div class="feature-desc" data-i18n="features.collage.desc">Arrange photos and videos freely on the canvas with quick, precise alignment tools and full control over layout, position and framing.</div>
   </div>
 
   <div class="feature-item fade-in">
@@ -417,23 +441,26 @@
   </div>
 
   <div class="feature-item fade-in">
-    <div class="feature-title" data-i18n="features.export.title">High-Resolution Export</div>
-    <div class="feature-desc" data-i18n="features.export.desc">Share directly or save to Camera Roll — in HQ or UL high resolution.</div>
+    <div class="feature-title" data-i18n="features.export.title">High-quality export</div>
+    <div class="feature-desc" data-i18n="features.export.desc">Create exports from your original photos in the photo library. Choose from three sizes and adjustable image quality, whether you want to share quickly or save a keepsake.</div>
     <div class="feature-badges">
-      <img class="badge-svg" src="assets/SizeHQ.svg" alt="HQ" width="21" height="13">
-      <img class="badge-svg" src="assets/SizeUL.svg" alt="UL" width="21" height="13">
+      <span class="badge-tag">S · 1080</span><span class="badge-tag">M · 2160</span><span class="badge-tag">L · 3240</span>
     </div>
   </div>
 
   <div class="feature-item fade-in">
     <div class="feature-title" data-i18n="features.privacy.title">Privacy First</div>
-    <div class="feature-desc" data-i18n="features.privacy.desc">All processing happens on-device. Your photos never leave your phone.</div>
+    <div class="feature-desc" data-i18n="features.privacy.desc">Media editing and export happen on your device. SView does not upload your media or projects to its servers. Sharing is your choice; usage analytics are optional.</div>
   </div>
 </section>
 
+<section class="specs" aria-labelledby="specs-title">
+<h2 id="specs-title" data-i18n="specs.title">Export sizes &amp; answers</h2><p data-i18n="specs.edge">S/M/L describe the target short edge of each page or output viewport, not the width of the entire panorama.</p>
+<table><thead><tr><th scope="col" data-i18n="specs.preset">Size</th><th scope="col" data-i18n="specs.target">Target short edge</th><th scope="col" data-i18n="specs.example">9:16 example (W × H)</th></tr></thead><tbody><tr><th scope="row">S</th><td>1080 px</td><td>1080 × 1920</td></tr><tr><th scope="row">M</th><td>2160 px</td><td>2160 × 3840</td></tr><tr><th scope="row">L</th><td>3240 px</td><td>3240 × 5760</td></tr></tbody></table><p data-i18n="specs.caveat">Landscape swaps width and height. Extreme ratios are capped at a 12,000px long edge. Video dimensions are even numbers and may be reduced after device compatibility checks; confirm the actual size shown in the app.</p><details><summary data-i18n="faq.formats.q">Which files and frame rates are exported?</summary><p data-i18n="faq.formats.a">Static Carousel pages use JPEG (80%, 95% or 100%) or HEIC (85%, with JPEG fallback if encoding fails). Pages with visible moving media use MP4 at 24, 30 or 60 fps. Scroll and Slide create one MP4 at a fixed 60 fps. S/M prefer H.264 and L prefers HEVC; the app checks a compatible codec and size on your device. Audio follows unmuted video clips; animated images have no audio.</p></details><details><summary data-i18n="faq.free.q">What is free, and what needs Pro?</summary><p data-i18n="faq.free.a">Video and animated-image import and editing, Carousel mode, all S/M/L sizes and image formats are free. The free tier includes one project. Scroll/Slide export and content using Pro frames, fonts or ratios require Pro; Pro also includes unlimited projects. Current prices and offers are shown before purchase in the app.</p></details><details><summary data-i18n="faq.limits.q">How long can a video be?</summary><p data-i18n="faq.limits.a">There is no product duration cap on the source video. Choose a segment of up to 5 minutes anywhere in it; a dynamic Carousel page is also limited to 5 minutes. Scroll runs for 3.9–30 seconds; Slide uses 1–10 seconds per page. Readability, storage and device resource limits still apply.</p></details><details><summary data-i18n="faq.raw.q">Can I import RAW or Live Photos?</summary><p data-i18n="faq.raw.a">RAW compatibility depends on Apple’s decoder, the camera format and the representation supplied by Photos; support for every RAW file is not guaranteed. Live Photos use their still image. HEICS animation is not supported. GIF, APNG and WebP imports are checked for file size, frame count and decoding limits.</p></details></section>
+</main>
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><img src="assets/logo.svg" alt="SView"></div>
+  <div class="footer-logo"><img src="assets/brand/iconLogo_V3.svg" alt="SView"></div>
   <div class="footer-links">
     <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
     <span class="sep">&middot;</span>
@@ -449,21 +476,21 @@
     en: {
       'nav.download': 'Download',
       'hero.tagline': 'Show your work\nTell your story',
-      'hero.subtitle': 'A photo cropping & layout tool for creating seamless carousels and collages on social media.',
+      "hero.subtitle": "A canvas for photos, videos and animated images. Create seamless carousels and collages, then share your work.",
       'hero.cta': 'Download on the App Store',
       'features.heading': 'Why SView',
       'features.carousel.title': 'Seamless Panoramic Carousels',
       'features.carousel.desc': 'Import wide photos and panoramas. SView splits them into perfectly aligned carousel slides.',
       'features.collage.title': 'Creative Collage Canvas',
-      'features.collage.desc': 'Arrange photos freely on a canvas with full control over layout, position, and framing.',
+      "features.collage.desc": "Arrange photos and videos freely on the canvas with quick, precise alignment tools and full control over layout, position and framing.",
       'features.text.title': 'Text & Fonts',
       'features.text.desc': 'Add text with a curated font library, upload your own fonts (Pro), and create unique styles with Style effects.',
       'features.ratio.title': 'Every Platform, Every Ratio',
       'features.ratio.desc': 'All major aspect ratios supported. Optimized for Instagram, X, TikTok, and rednote.',
-      'features.export.title': 'High-Resolution Export',
-      'features.export.desc': 'Share directly or save to Camera Roll — in HQ or UL high resolution.',
+      "features.export.title": "High-quality export",
+      "features.export.desc": "Create exports from your original photos in the photo library. Choose from three sizes and adjustable image quality, whether you want to share quickly or save a keepsake.",
       'features.privacy.title': 'Privacy First',
-      'features.privacy.desc': 'All processing happens on-device. Your photos never leave your phone.',
+      "features.privacy.desc": "Media editing and export happen on your device. SView does not upload your media or projects to its servers. Sharing is your choice; usage analytics are optional.",
       'footer.privacy': 'Privacy Policy',
       'footer.terms': 'Terms of Use',
       'preview.1': 'SView\nCreate panoramic carousels and collages for social media',
@@ -472,26 +499,46 @@
       'preview.4': 'Smart assistance,\nEasy layout',
       'preview.5': 'High-resolution export,\nFast sharing',
       'preview.6': 'Simple tools,\nNothing extra',
-      'preview.7': 'Show your work,\nTell your story'
+      'preview.7': 'Show your work,\nTell your story',
+      "features.video.title": "Share work that moves",
+      "features.video.desc": "Import videos, GIFs, APNGs and animated WebP directly onto the canvas. Arrange and edit them, then export MP4 videos for easy sharing.",
+      "features.modes.title": "Three ways to show your work",
+      "features.modes.desc": "Carousel exports separate pages. Scroll moves continuously across the canvas; Slide turns the pages at your chosen interval.",
+      "specs.title": "Export sizes & answers",
+      "specs.edge": "S/M/L describe the target short edge of each page or output viewport, not the width of the entire panorama.",
+      "specs.preset": "Size",
+      "specs.target": "Target short edge",
+      "specs.example": "9:16 example (W × H)",
+      "specs.caveat": "Landscape swaps width and height. Extreme ratios are capped at a 12,000px long edge. Video dimensions are even numbers and may be reduced after device compatibility checks; confirm the actual size shown in the app.",
+      "faq.formats.q": "Which files and frame rates are exported?",
+      "faq.formats.a": "Static Carousel pages use JPEG (80%, 95% or 100%) or HEIC (85%, with JPEG fallback if encoding fails). Pages with visible moving media use MP4 at 24, 30 or 60 fps. Scroll and Slide create one MP4 at a fixed 60 fps. S/M prefer H.264 and L prefers HEVC; the app checks a compatible codec and size on your device. Audio follows unmuted video clips; animated images have no audio.",
+      "faq.free.q": "What is free, and what needs Pro?",
+      "faq.free.a": "Video and animated-image import and editing, Carousel mode, all S/M/L sizes and image formats are free. The free tier includes one project. Scroll/Slide export and content using Pro frames, fonts or ratios require Pro; Pro also includes unlimited projects. Current prices and offers are shown before purchase in the app.",
+      "faq.limits.q": "How long can a video be?",
+      "faq.limits.a": "There is no product duration cap on the source video. Choose a segment of up to 5 minutes anywhere in it; a dynamic Carousel page is also limited to 5 minutes. Scroll runs for 3.9–30 seconds; Slide uses 1–10 seconds per page. Readability, storage and device resource limits still apply.",
+      "faq.raw.q": "Can I import RAW or Live Photos?",
+      "faq.raw.a": "RAW compatibility depends on Apple’s decoder, the camera format and the representation supplied by Photos; support for every RAW file is not guaranteed. Live Photos use their still image. HEICS animation is not supported. GIF, APNG and WebP imports are checked for file size, frame count and decoding limits.",
+      "gallery.note": "Screenshots are from an earlier version; the interface may differ.",
+      "hero.instagram": "Follow on Instagram",
     },
     zh: {
       'nav.download': '下载',
       'hero.tagline': '展示你的作品\n讲述你的故事',
-      'hero.subtitle': '照片裁切与排版工具，轻松制作无缝轮播图和创意拼贴，一键发布社交平台。',
+      "hero.subtitle": "用自由画布排版照片、视频与动图，制作无缝轮播和创意拼贴，分享你的作品。",
       'hero.cta': '从苹果商店下载',
       'features.heading': '主要功能',
       'features.carousel.title': '无缝全景轮播',
       'features.carousel.desc': '导入宽幅照片和全景图，SView 将其分割为完美对齐的轮播卡片。',
       'features.collage.title': '创意拼贴画布',
-      'features.collage.desc': '在画布上自由排列照片，完全掌控布局、位置和构图。',
+      "features.collage.desc": "利用便捷精确的对齐功能，在画布上自由排版照片和视频，轻松掌控布局、位置与构图。",
       'features.text.title': '文字与字体',
       'features.text.desc': '添加文字，从精选字库挑选或上传自己的字体（Pro），用 Style 效果创造独特风格。',
       'features.ratio.title': '全平台，全比例',
       'features.ratio.desc': '支持所有主流比例，适配 Instagram、X、抖音、小红书。',
-      'features.export.title': '高分辨率导出',
-      'features.export.desc': '直接分享或保存到相册，可选 HQ、UL 高分辨率。',
+      "features.export.title": "高画质导出",
+      "features.export.desc": "从相册原图生成导出文件，提供三档尺寸与可选画质，快速分享或保存留念皆可。",
       'features.privacy.title': '隐私优先',
-      'features.privacy.desc': '所有处理均在设备端完成，您的照片绝不离开手机。',
+      "features.privacy.desc": "媒体编辑与导出在设备内完成，SView 不将媒体或项目上传到自己的服务器。分享由你主动选择，使用统计可自由开关。",
       'footer.privacy': '隐私政策',
       'footer.terms': '使用条款',
       'preview.1': 'SView\n为社交媒体创建全景轮播和拼贴',
@@ -500,26 +547,46 @@
       'preview.4': '智能辅助，\n轻松排版',
       'preview.5': '高分辨率导出，\n快速分享',
       'preview.6': '简洁工具，\n恰到好处',
-      'preview.7': '展示你的作品，\n讲述你的故事'
+      'preview.7': '展示你的作品，\n讲述你的故事',
+      "features.video.title": "分享动态作品",
+      "features.video.desc": "支持视频和 GIF／APNG／动态 WebP 导入画布，直接排版编辑，输出为 MP4 视频，轻松分享。",
+      "features.modes.title": "三种方式，展示作品",
+      "features.modes.desc": "轮播分页输出；画廊连续滑过整个画布；幻灯片按所选间隔翻页。",
+      "specs.title": "导出规格与常见问题",
+      "specs.edge": "S／M／L 表示每页或输出视窗的目标短边，并非整幅全景画布的总宽度。",
+      "specs.preset": "尺寸",
+      "specs.target": "目标短边",
+      "specs.example": "9:16 示例（宽 × 高）",
+      "specs.caveat": "横向比例交换宽高。极端比例的长边上限为 12,000px。视频宽高取偶数，并可能按设备兼容检查缩小；以 App 显示的实际尺寸为准。",
+      "faq.formats.q": "导出哪些格式和帧率？",
+      "faq.formats.a": "轮播静态页可选 JPEG（80%、95%、100%）或 HEIC（85%，编码失败时回退 JPEG）；有可见动态素材的页输出 MP4，可选 24／30／60 fps。画廊、幻灯片输出单个 MP4，固定 60 fps。S／M 优先 H.264，L 优先 HEVC，App 会在设备上检查兼容编码与尺寸。声音来自未静音的视频片段，动图本身没有音轨。",
+      "faq.free.q": "哪些免费，哪些需要 Pro？",
+      "faq.free.a": "视频和动图导入、编辑、轮播模式、全部 S／M／L 尺寸及图片格式免费，免费版可创建 1 个项目。画廊／幻灯片正式导出及使用 Pro 边框、字体、比例的内容需要 Pro；Pro 还包括无限项目。价格及优惠以 App 购买前显示为准。",
+      "faq.limits.q": "视频有时长限制吗？",
+      "faq.limits.a": "原视频不设产品时长上限，可在全片任意位置选取最长 5 分钟的片段；动态轮播单页同样最长 5 分钟。画廊时长为 3.9–30 秒，幻灯片每页间隔为 1–10 秒。仍受文件可读取性、存储空间及设备资源限制。",
+      "faq.raw.q": "支持 RAW 和 Live Photo 吗？",
+      "faq.raw.a": "RAW 兼容性取决于 Apple 解码能力、相机格式及相册交付的表示，不保证支持所有 RAW 文件。Live Photo 使用静照片，不支持 HEICS 动画。GIF、APNG、WebP 导入有文件大小、帧数与解码资源限制。",
+      "gallery.note": "截图来自较早版本，实际界面可能有所不同。",
+      "hero.instagram": "关注 Instagram",
     },
     'zh-Hant': {
       'nav.download': '下載',
       'hero.tagline': '展示你的作品\n講述你的故事',
-      'hero.subtitle': '照片裁切與排版工具，輕鬆製作無縫輪播圖和創意拼貼，一鍵發佈社群平台。',
+      "hero.subtitle": "用自由畫布編排照片、影片與動圖，製作無縫輪播和創意拼貼，分享你的作品。",
       'hero.cta': '從 App Store 下載',
       'features.heading': '主要功能',
       'features.carousel.title': '無縫全景輪播',
       'features.carousel.desc': '匯入寬幅照片和全景圖，SView 將其分割為完美對齊的輪播卡片。',
       'features.collage.title': '創意拼貼畫布',
-      'features.collage.desc': '在畫布上自由排列照片，完全掌控佈局、位置和構圖。',
+      "features.collage.desc": "利用便捷精準的對齊功能，在畫布上自由編排照片與影片，輕鬆掌握版面、位置與構圖。",
       'features.text.title': '文字與字體',
       'features.text.desc': '新增文字，從精選字庫挑選或上傳自己的字體（Pro），用 Style 效果創造獨特風格。',
       'features.ratio.title': '全平台，全比例',
       'features.ratio.desc': '支援所有主流比例，適配 Instagram、X、TikTok、rednote。',
-      'features.export.title': '高解析度匯出',
-      'features.export.desc': '直接分享或儲存到相簿，可選 HQ、UL 高解析度。',
+      "features.export.title": "高畫質匯出",
+      "features.export.desc": "從相簿原圖產生匯出檔案，提供三種尺寸與可選畫質，方便快速分享或儲存留念。",
       'features.privacy.title': '隱私優先',
-      'features.privacy.desc': '所有處理均在裝置端完成，您的照片絕不離開手機。',
+      "features.privacy.desc": "媒體編輯與匯出在裝置內完成，SView 不將媒體或專案上傳至自己的伺服器。分享由你主動選擇，使用統計可自由開關。",
       'footer.privacy': '隱私權政策',
       'footer.terms': '使用條款',
       'preview.1': 'SView\n為社群媒體建立全景輪播和拼貼',
@@ -528,26 +595,46 @@
       'preview.4': '智慧輔助，\n輕鬆排版',
       'preview.5': '高解析度匯出，\n快速分享',
       'preview.6': '簡潔工具，\n恰到好處',
-      'preview.7': '展示你的作品，\n講述你的故事'
+      'preview.7': '展示你的作品，\n講述你的故事',
+      "features.video.title": "分享動態作品",
+      "features.video.desc": "支援影片及 GIF／APNG／動態 WebP 匯入畫布，直接編排與編輯，輸出為 MP4 影片，輕鬆分享。",
+      "features.modes.title": "三種方式，展示作品",
+      "features.modes.desc": "輪播分頁輸出；畫廊連續滑過整個畫布；幻燈片按所選間隔翻頁。",
+      "specs.title": "匯出規格與常見問題",
+      "specs.edge": "S／M／L 表示每頁或輸出視窗的目標短邊，並非整幅全景畫布的總寬度。",
+      "specs.preset": "尺寸",
+      "specs.target": "目標短邊",
+      "specs.example": "9:16 範例（寬 × 高）",
+      "specs.caveat": "橫向比例交換寬高。極端比例的長邊上限為 12,000px。影片寬高取偶數，並可能依裝置相容檢查縮小；以 App 顯示的實際尺寸為準。",
+      "faq.formats.q": "匯出哪些格式和影格率？",
+      "faq.formats.a": "輪播靜態頁可選 JPEG（80%、95%、100%）或 HEIC（85%，編碼失敗時改用 JPEG）；可見動態素材頁輸出 MP4，可選 24／30／60 fps。畫廊、幻燈片輸出單一 MP4，固定 60 fps。S／M 優先 H.264，L 優先 HEVC；App 會檢查裝置相容編碼與尺寸。聲音來自未靜音的影片片段，動圖沒有音軌。",
+      "faq.free.q": "哪些免費，哪些需要 Pro？",
+      "faq.free.a": "影片和動圖匯入、編輯、輪播模式、全部 S／M／L 尺寸及圖片格式免費，免費版可建立 1 個專案。畫廊／幻燈片正式匯出及使用 Pro 相框、字體、比例的內容需要 Pro；Pro 亦包含無限專案。價格及優惠以 App 購買前顯示為準。",
+      "faq.limits.q": "影片有時間限制嗎？",
+      "faq.limits.a": "原影片不設產品時間上限，可在全片任意位置選取最長 5 分鐘的片段；動態輪播單頁同樣最長 5 分鐘。畫廊為 3.9–30 秒，幻燈片每頁間隔為 1–10 秒。仍受檔案可讀性、儲存空間及裝置資源限制。",
+      "faq.raw.q": "支援 RAW 和 Live Photo 嗎？",
+      "faq.raw.a": "RAW 相容性取決於 Apple 解碼能力、相機格式及相簿交付的表示，不保證支援所有 RAW 檔案。Live Photo 使用靜照片，不支援 HEICS 動畫。GIF、APNG、WebP 匯入有檔案大小、幀數與解碼資源限制。",
+      "gallery.note": "截圖來自較早版本，實際介面可能有所不同。",
+      "hero.instagram": "追蹤 Instagram",
     },
     ja: {
       'nav.download': 'ダウンロード',
       'hero.tagline': '作品を見せよう\n物語を伝えよう',
-      'hero.subtitle': '写真の切り抜き・レイアウトツール。SNS映えするカルーセルやコラージュをかんたん作成。',
+      "hero.subtitle": "写真・動画・アニメーション画像を自由にレイアウト。シームレスなカルーセルやコラージュを作って、作品をシェア。",
       'hero.cta': 'App Store からダウンロード',
       'features.heading': 'SView でできること',
       'features.carousel.title': 'シームレスなパノラマカルーセル',
       'features.carousel.desc': 'ワイド写真やパノラマを取り込み、完璧に並んだカルーセルスライドに分割。',
       'features.collage.title': 'クリエイティブなコラージュキャンバス',
-      'features.collage.desc': 'キャンバス上で写真を自由に配置。レイアウト、位置、フレーミングを完全にコントロール。',
+      "features.collage.desc": "手軽で精密な整列機能を使い、写真や動画をキャンバスに自由に配置。レイアウト、位置、フレーミングを思いどおりに調整できます。",
       'features.text.title': 'テキストとフォント',
       'features.text.desc': 'テキストを追加。厳選フォントライブラリから選ぶか自分のフォントをアップロード（Pro）、Style エフェクトで独自のスタイルを。',
       'features.ratio.title': 'すべてのプラットフォーム、すべての比率',
       'features.ratio.desc': '主要なアスペクト比に対応。Instagram、X、TikTok、rednoteに最適化。',
-      'features.export.title': '高解像度エクスポート',
-      'features.export.desc': '直接共有またはカメラロールに保存。HQ・UL の高解像度に対応。',
+      "features.export.title": "高画質で書き出し",
+      "features.export.desc": "写真ライブラリの元画像から書き出し。3つのサイズと画質設定を選べるので、すぐにシェアしたいときも、思い出として保存したいときも。",
       'features.privacy.title': 'プライバシー最優先',
-      'features.privacy.desc': 'すべての処理はデバイス上で完結。写真が端末から出ることはありません。',
+      "features.privacy.desc": "メディアの編集と書き出しは端末内で処理し、SView のサーバーにアップロードしません。共有はユーザーが選択し、利用統計は任意です。",
       'footer.privacy': 'プライバシーポリシー',
       'footer.terms': '利用規約',
       'preview.1': 'SView\nSNS向けパノラマカルーセルとコラージュを作成',
@@ -556,26 +643,46 @@
       'preview.4': 'スマートアシスタンス、\n簡単レイアウト',
       'preview.5': '高解像度エクスポート、\n素早くシェア',
       'preview.6': 'シンプルなツール、\n余計なものなし',
-      'preview.7': '作品を見せよう、\n物語を伝えよう'
+      'preview.7': '作品を見せよう、\n物語を伝えよう',
+      "features.video.title": "動きのある作品をシェア",
+      "features.video.desc": "動画、GIF、APNG、アニメーション WebP をキャンバスに直接読み込み。配置・編集して MP4 動画に書き出し、手軽にシェアできます。",
+      "features.modes.title": "作品を見せる3つの方法",
+      "features.modes.desc": "Carousel はページごとに出力。Scroll はキャンバスを連続移動し、Slide は指定した間隔でページを送ります。",
+      "specs.title": "書き出し仕様と FAQ",
+      "specs.edge": "S・M・L は各ページまたは出力表示枠の目標短辺です。パノラマ全体の横幅ではありません。",
+      "specs.preset": "サイズ",
+      "specs.target": "目標短辺",
+      "specs.example": "9:16 の例（幅 × 高さ）",
+      "specs.caveat": "横向きでは幅と高さが入れ替わります。極端な比率の長辺上限は12,000px。動画は偶数サイズとなり、端末の互換性確認で縮小される場合があります。アプリに表示される実寸を確認してください。",
+      "faq.formats.q": "形式とフレームレートは？",
+      "faq.formats.a": "Carousel の静止ページは JPEG（80・95・100%）または HEIC（85%、失敗時 JPEG）。動く素材を含むページは MP4、24・30・60 fps。Scroll・Slide は固定60 fpsの単一MP4です。S・M は H.264、L は HEVC を優先し、端末で互換性を確認します。音声はミュートしていない動画から使用し、アニメーション画像には音声がありません。",
+      "faq.free.q": "無料と Pro の違いは？",
+      "faq.free.a": "動画・アニメーション画像の読み込みと編集、Carousel、全 S・M・L サイズと画像形式は無料です。無料版は1プロジェクト。Scroll・Slide の書き出し、Pro フレーム・フォント・比率には Pro が必要で、プロジェクト数も無制限になります。価格と特典は購入前のアプリ表示を確認してください。",
+      "faq.limits.q": "動画の長さに制限は？",
+      "faq.limits.a": "元動画に製品上の時間制限はありません。任意の位置から最長5分の区間を選べます。動的 Carousel ページも最長5分。Scroll は3.9〜30秒、Slide は1ページ1〜10秒です。読み込み可否、保存容量、端末リソースの制限があります。",
+      "faq.raw.q": "RAW や Live Photo は？",
+      "faq.raw.a": "RAW は Apple のデコーダー、カメラ形式、写真ライブラリが提供するデータに依存し、全ファイル対応は保証しません。Live Photo は静止画のみ。HEICS アニメーションは非対応です。GIF・APNG・WebP には容量・フレーム数・デコードの制限があります。",
+      "gallery.note": "画像は旧バージョンのものです。実際の画面とは異なる場合があります。",
+      "hero.instagram": "Instagramをフォロー",
     },
     ko: {
       'nav.download': '다운로드',
       'hero.tagline': '당신의 작품을 보여주세요\n당신의 이야기를 들려주세요',
-      'hero.subtitle': '사진 크롭 & 레이아웃 도구. 깔끔한 캐러셀과 콜라주를 만들어 SNS에 바로 공유하세요.',
+      "hero.subtitle": "사진, 동영상, 움직이는 이미지를 자유롭게 배치하세요. 매끄러운 캐러셀과 콜라주를 만들고 작품을 공유하세요.",
       'hero.cta': 'App Store에서 다운로드',
       'features.heading': 'SView의 핵심 기능',
       'features.carousel.title': '매끄러운 파노라마 캐러셀',
       'features.carousel.desc': '와이드 사진과 파노라마를 가져와 완벽하게 정렬된 캐러셀 슬라이드로 분할합니다.',
       'features.collage.title': '크리에이티브 콜라주 캔버스',
-      'features.collage.desc': '캔버스에서 사진을 자유롭게 배치하고 레이아웃, 위치, 프레이밍을 완전히 제어하세요.',
+      "features.collage.desc": "간편하고 정밀한 정렬 기능으로 캔버스에 사진과 동영상을 자유롭게 배치하고 레이아웃, 위치, 구도를 원하는 대로 조정하세요.",
       'features.text.title': '텍스트와 폰트',
       'features.text.desc': '텍스트를 추가하세요. 엄선된 폰트 라이브러리에서 고르거나 직접 폰트를 업로드(Pro)하고, Style 효과로 나만의 스타일을 만드세요.',
       'features.ratio.title': '모든 플랫폼, 모든 비율',
       'features.ratio.desc': '모든 주요 화면 비율 지원. Instagram, X, TikTok, rednote에 최적화.',
-      'features.export.title': '고해상도 내보내기',
-      'features.export.desc': '바로 공유하거나 카메라 롤에 저장 — HQ·UL 고해상도 지원.',
+      "features.export.title": "고화질 내보내기",
+      "features.export.desc": "사진 보관함의 원본 이미지로 결과물을 만드세요. 세 가지 크기와 화질 설정을 선택해 빠르게 공유하거나 추억으로 간직할 수 있어요.",
       'features.privacy.title': '개인정보 보호 우선',
-      'features.privacy.desc': '모든 처리는 기기에서 이루어집니다. 사진은 절대 휴대폰을 떠나지 않습니다.',
+      "features.privacy.desc": "미디어 편집과 내보내기는 기기에서 처리되며 SView 서버에 업로드하지 않습니다. 공유는 직접 선택하며 사용 통계는 선택 사항입니다.",
       'footer.privacy': '개인정보 처리방침',
       'footer.terms': '이용약관',
       'preview.1': 'SView\nSNS용 파노라마 캐러셀과 콜라주 제작',
@@ -584,26 +691,46 @@
       'preview.4': '스마트 보조,\n쉬운 레이아웃',
       'preview.5': '고해상도 내보내기,\n빠른 공유',
       'preview.6': '심플한 도구,\n군더더기 없이',
-      'preview.7': '작품을 보여주세요,\n이야기를 들려주세요'
+      'preview.7': '작품을 보여주세요,\n이야기를 들려주세요',
+      "features.video.title": "움직이는 작품을 공유하세요",
+      "features.video.desc": "동영상, GIF, APNG, 움직이는 WebP를 캔버스로 바로 가져와 배치하고 편집하세요. MP4 동영상으로 내보내 손쉽게 공유할 수 있어요.",
+      "features.modes.title": "작품을 보여 주는 세 가지 방법",
+      "features.modes.desc": "Carousel은 페이지별로 출력합니다. Scroll는 캔버스를 연속으로 이동하고, Slide는 선택한 간격으로 페이지를 넘깁니다.",
+      "specs.title": "내보내기 사양과 도움말",
+      "specs.edge": "S·M·L은 각 페이지 또는 출력 화면의 목표 짧은 변입니다. 전체 파노라마의 너비가 아닙니다.",
+      "specs.preset": "크기",
+      "specs.target": "목표 짧은 변",
+      "specs.example": "9:16 예시 (너비 × 높이)",
+      "specs.caveat": "가로 비율에서는 너비와 높이가 바뀝니다. 극단적 비율의 긴 변은 최대 12,000px입니다. 동영상은 짝수 크기이며 기기 호환성 확인 후 줄어들 수 있습니다. 앱에 표시된 실제 크기를 확인하세요.",
+      "faq.formats.q": "파일 형식과 프레임 속도는?",
+      "faq.formats.a": "Carousel 정지 페이지는 JPEG(80·95·100%) 또는 HEIC(85%, 실패 시 JPEG)입니다. 움직이는 미디어가 보이는 페이지는 MP4로 24·30·60 fps를 선택합니다. Scroll·Slide는 고정 60 fps의 MP4 한 개입니다. S·M은 H.264, L은 HEVC를 우선하며 기기 호환성을 확인합니다. 음소거하지 않은 동영상의 소리를 사용하며 움직이는 이미지에는 소리가 없습니다.",
+      "faq.free.q": "무료와 Pro의 차이는?",
+      "faq.free.a": "동영상·움직이는 이미지 가져오기와 편집, Carousel 모드, 모든 S·M·L 크기와 이미지 형식은 무료입니다. 무료 버전은 프로젝트 1개를 만들 수 있습니다. Scroll·Slide 내보내기와 Pro 프레임·폰트·비율 사용에는 Pro가 필요하며 프로젝트도 무제한입니다. 가격과 혜택은 구매 전 앱에서 확인하세요.",
+      "faq.limits.q": "동영상 길이 제한은?",
+      "faq.limits.a": "원본 영상에는 제품상 길이 제한이 없습니다. 원하는 위치에서 최대 5분 구간을 선택할 수 있으며 동적 Carousel 페이지도 최대 5분입니다. Scroll는 3.9–30초, Slide는 페이지당 1–10초입니다. 파일 읽기, 저장 공간, 기기 리소스 제한은 적용됩니다.",
+      "faq.raw.q": "RAW와 Live Photo도 지원하나요?",
+      "faq.raw.a": "RAW 호환성은 Apple 디코더, 카메라 형식, 사진 앱이 제공하는 데이터에 따라 달라지며 모든 RAW 파일을 보장하지 않습니다. Live Photo는 정지 이미지만 사용합니다. HEICS 애니메이션은 지원하지 않습니다. GIF·APNG·WebP에는 용량·프레임 수·디코딩 제한이 있습니다.",
+      "gallery.note": "이전 버전의 스크린샷입니다. 실제 화면과 다를 수 있습니다.",
+      "hero.instagram": "Instagram 팔로우",
     },
     es: {
       'nav.download': 'Descargar',
       'hero.tagline': 'Muestra tu trabajo\nCuenta tu historia',
-      'hero.subtitle': 'Una herramienta de recorte y maquetación de fotos para crear carruseles y collages en redes sociales.',
+      "hero.subtitle": "Un lienzo para fotos, vídeos e imágenes animadas. Crea carruseles continuos y collages, y comparte tus obras.",
       'hero.cta': 'Descargar en la App Store',
       'features.heading': 'Por qué SView',
       'features.carousel.title': 'Carruseles panorámicos perfectos',
       'features.carousel.desc': 'Importa fotos panorámicas y SView las divide en slides perfectamente alineados.',
       'features.collage.title': 'Lienzo creativo para collages',
-      'features.collage.desc': 'Organiza fotos libremente en un lienzo con control total sobre diseño, posición y encuadre.',
+      "features.collage.desc": "Organiza fotos y vídeos libremente con herramientas de alineación rápidas y precisas, y controla la composición, la posición y el encuadre.",
       'features.text.title': 'Texto y fuentes',
       'features.text.desc': 'Añade texto con una biblioteca de fuentes seleccionada, sube tus propias fuentes (Pro) y crea estilos únicos con efectos de Style.',
       'features.ratio.title': 'Todas las plataformas, todas las proporciones',
       'features.ratio.desc': 'Todas las proporciones principales. Optimizado para Instagram, X, TikTok y rednote.',
-      'features.export.title': 'Exportación en alta resolución',
-      'features.export.desc': 'Comparte directamente o guarda en el Carrete — en alta resolución HQ o UL.',
+      "features.export.title": "Exportación de alta calidad",
+      "features.export.desc": "Crea archivos a partir de las fotos originales de tu fototeca. Elige entre tres tamaños y varios ajustes de calidad para compartir al instante o guardar tus recuerdos.",
       'features.privacy.title': 'Privacidad ante todo',
-      'features.privacy.desc': 'Todo el procesamiento ocurre en el dispositivo. Tus fotos nunca salen de tu teléfono.',
+      "features.privacy.desc": "La edición y exportación se procesan en tu dispositivo. SView no sube tus medios ni proyectos a sus servidores. Tú eliges si compartes; las estadísticas de uso son opcionales.",
       'footer.privacy': 'Política de privacidad',
       'footer.terms': 'Condiciones de uso',
       'preview.1': 'SView\nCrea carruseles panorámicos y collages para redes sociales',
@@ -612,7 +739,27 @@
       'preview.4': 'Asistencia inteligente,\nDiseño fácil',
       'preview.5': 'Exportación en alta resolución,\nCompartir rápido',
       'preview.6': 'Herramientas simples,\nNada de más',
-      'preview.7': 'Muestra tu trabajo,\nCuenta tu historia'
+      'preview.7': 'Muestra tu trabajo,\nCuenta tu historia',
+      "features.video.title": "Comparte obras en movimiento",
+      "features.video.desc": "Importa vídeos, GIF, APNG y WebP animado directamente al lienzo. Organízalos y edítalos, y expórtalos como vídeos MP4 para compartirlos fácilmente.",
+      "features.modes.title": "Tres formas de mostrar tus obras",
+      "features.modes.desc": "Carousel exporta páginas separadas. Scroll recorre el lienzo de forma continua; Slide cambia de página al intervalo elegido.",
+      "specs.title": "Tamaños y preguntas frecuentes",
+      "specs.edge": "S, M y L indican el lado corto objetivo de cada página o ventana de salida, no la anchura de toda la panorámica.",
+      "specs.preset": "Tamaño",
+      "specs.target": "Lado corto objetivo",
+      "specs.example": "Ejemplo 9:16 (ancho × alto)",
+      "specs.caveat": "En horizontal se intercambian ancho y alto. Las proporciones extremas tienen un lado largo máximo de 12.000px. El vídeo usa dimensiones pares y puede reducirse tras comprobar la compatibilidad del dispositivo; consulta el tamaño real en la app.",
+      "faq.formats.q": "¿Qué formatos y velocidades se exportan?",
+      "faq.formats.a": "Las páginas estáticas de Carousel usan JPEG (80%, 95% o 100%) o HEIC (85%, con JPEG si falla). Las páginas con movimiento usan MP4 a 24, 30 o 60 fps. Scroll y Slide crean un MP4 a 60 fps fijos. S/M prefieren H.264 y L, HEVC; la app comprueba el códec y tamaño compatibles. El audio procede de clips sin silenciar; las imágenes animadas no tienen audio.",
+      "faq.free.q": "¿Qué es gratis y qué requiere Pro?",
+      "faq.free.a": "Importar y editar vídeos y animaciones, el modo Carousel, todos los tamaños S/M/L y formatos de imagen son gratis. El plan gratuito permite un proyecto. Exportar Scroll/Slide y usar marcos, fuentes o proporciones Pro requiere Pro, que también incluye proyectos ilimitados. Los precios y ofertas se muestran en la app antes de comprar.",
+      "faq.limits.q": "¿Hay un límite de duración?",
+      "faq.limits.a": "No hay límite de duración del vídeo original impuesto por el producto. Puedes elegir hasta 5 minutos desde cualquier punto; cada página dinámica de Carousel también admite hasta 5 minutos. Scroll dura 3,9–30 segundos; Slide usa 1–10 segundos por página. Se aplican límites de lectura, espacio y recursos del dispositivo.",
+      "faq.raw.q": "¿Puedo importar RAW o Live Photos?",
+      "faq.raw.a": "La compatibilidad RAW depende del decodificador de Apple, del formato de cámara y de la representación entregada por Fotos; no se garantiza todo archivo RAW. Live Photos usa la imagen fija. No se admite animación HEICS. GIF, APNG y WebP tienen límites de tamaño, fotogramas y decodificación.",
+      "gallery.note": "Capturas de una versión anterior; la interfaz puede variar.",
+      "hero.instagram": "Síguenos en Instagram",
     }
   };
 
@@ -623,6 +770,8 @@
   function setLanguage(lang) {
     if (!T[lang]) return;
     currentLang = lang;
+    document.querySelector('meta[name="description"]').content = T[lang]["hero.subtitle"];
+    document.querySelector('meta[property="og:description"]').content = T[lang]["hero.subtitle"];
     document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : (lang === 'zh-Hant' ? 'zh-Hant' : lang);
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
       var key = el.getAttribute('data-i18n');
@@ -673,6 +822,12 @@
   document.addEventListener('click', function() {
     langDropdown.classList.remove('open');
     langBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && langDropdown.classList.contains("open")) {
+      langDropdown.classList.remove("open"); langBtn.setAttribute("aria-expanded", "false"); langBtn.focus();
+    }
   });
 
   // Nav scroll
