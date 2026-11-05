@@ -44,13 +44,13 @@
             {
               "id": "video-demo",
               "type": "video",
-              "url": "https://cdn.sviewapp.com/whats-new/v1.3.3/video-be27b29509f9.mp4",
+              "url": "https://cdn.sviewapp.com/whats-new/v1.3.3/video-5fba7a4730fb.mp4",
               "posterURL": "https://cdn.sviewapp.com/whats-new/v1.3.3/video-0167cb3b3b22.jpg",
-              "width": 1080,
-              "height": 1440,
+              "width": 720,
+              "height": 960,
               "duration": 10.0,
-              "byteCount": 4786960,
-              "sha256": "be27b29509f9b727d7b468150364f7b31214a6ba97e47f0f71821c771bfc7f66"
+              "byteCount": 2626723,
+              "sha256": "5fba7a4730fbee78db8674ae10287f6f9a742432b1f4870ad23d352e8e34acca"
             }
           ],
           "i18n": {
@@ -95,13 +95,13 @@
             {
               "id": "gif-demo",
               "type": "video",
-              "url": "https://cdn.sviewapp.com/whats-new/v1.3.3/gif-5c9e160dc570.mp4",
+              "url": "https://cdn.sviewapp.com/whats-new/v1.3.3/gif-dc9607a265c5.mp4",
               "posterURL": "https://cdn.sviewapp.com/whats-new/v1.3.3/gif-a2503bb83890.jpg",
-              "width": 1080,
-              "height": 1440,
+              "width": 720,
+              "height": 960,
               "duration": 10.0,
-              "byteCount": 4951412,
-              "sha256": "5c9e160dc57020879b0194f204a4c86f0d02166ee2f0c65f9e610dacdc1eb295"
+              "byteCount": 2670186,
+              "sha256": "dc9607a265c5862a62201b1fa9d82eac9d796753a09218d0acba5f1c34edeb7d"
             }
           ],
           "i18n": {
@@ -140,13 +140,13 @@
             {
               "id": "modes-demo",
               "type": "video",
-              "url": "https://cdn.sviewapp.com/whats-new/v1.3.3/modes-40ae9da09675.mp4",
+              "url": "https://cdn.sviewapp.com/whats-new/v1.3.3/modes-e336a87de736.mp4",
               "posterURL": "https://cdn.sviewapp.com/whats-new/v1.3.3/modes-915db958e412.jpg",
-              "width": 1080,
-              "height": 1440,
+              "width": 720,
+              "height": 960,
               "duration": 10.0,
-              "byteCount": 15685034,
-              "sha256": "40ae9da09675836950f335d28cff2e3fa33a6f6e2b516f0f4a2326f0cc8b7ed5"
+              "byteCount": 2901154,
+              "sha256": "e336a87de73611be2fc2391f6060f8922ee5c93439689d063d4f8b94e97d7ca2"
             }
           ],
           "i18n": {
