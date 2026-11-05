@@ -69,8 +69,8 @@
 
     .lang-selector { position: relative; }
     .lang-btn {
-      background: none; border: 1px solid var(--color-border); border-radius: 6px;
-      padding: 4px 10px; font-family: var(--font-sans); font-size: 13px; font-weight: 600;
+      background: none; border: 1px solid var(--color-border); border-radius: 100px;
+      padding: 7px 18px; line-height: 1.6; font-family: var(--font-sans); font-size: 13px; font-weight: 600;
       color: var(--color-text-secondary); cursor: pointer; letter-spacing: 0.03em;
       transition: border-color 0.2s, color 0.2s;
     }
@@ -95,6 +95,7 @@
       padding: 7px 18px; border-radius: 100px; font-size: 13px; font-weight: 600;
       text-decoration: none; transition: background 0.2s; letter-spacing: 0.01em;
     }
+    .lang-btn, .nav-download { box-sizing: border-box; height: 36px; display: inline-flex; align-items: center; justify-content: center; }
     .nav-download:hover { background: var(--color-accent-hover); }
 
     /* ===== HERO ===== */
@@ -132,7 +133,7 @@
     }
 
     .hero-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; padding: 0 20px; }
-    .hero-instagram { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 13px 24px; border: 1px solid #777; border-radius: 100px; color: var(--color-text); font-size: 16px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
+    .hero-instagram { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; flex-shrink: 0; padding: 13px; border: 1px solid #777; border-radius: 100px; color: var(--color-text); font-size: 16px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
     .hero-instagram:hover { background: #efefec; }
     .hero-cta {
       display: inline-block;
@@ -250,7 +251,7 @@
     .specs details { border-bottom: 1px solid var(--color-rule); }
     .specs details p { padding-bottom: 18px; }
     a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #245cc5; outline-offset: 4px; }
-    .lang-btn, .lang-option { min-height: 44px; }
+    .lang-option { min-height: 44px; }
     @media (max-width: 400px) { .specs h2 { font-size: 24px; } .specs th, .specs td { padding: 10px 4px; font-size: 12px; } }
 
     /* ===== FOOTER ===== */
@@ -311,14 +312,15 @@
     @media (max-width: 640px) {
       .nav { padding: 0 20px; height: 50px; }
       .nav-logo img { height: 15px; }
+      .lang-btn, .nav-download { height: 32px; }
       .nav-download { padding: 6px 14px; font-size: 12px; }
-      .lang-btn { font-size: 12px; padding: 3px 8px; }
+      .lang-btn { font-size: 12px; padding: 6px 14px; }
 
       .hero { padding: 40px 20px 0; }
       .hero-icon { width: 72px; height: 72px; margin-bottom: 14px; }
       .hero-app-title { font-size: 12px; margin-bottom: 20px; }
       .hero-subtitle { font-size: 15px; margin-bottom: 28px; }
-      .hero-instagram { min-height: 44px; padding: 10px 20px; font-size: 14px; }
+      .hero-instagram { width: 44px; height: 44px; padding: 10px; }
       .hero-cta { padding: 11px 28px; font-size: 14px; }
 
       .gallery { margin-top: 48px; padding-bottom: 16px; }
@@ -334,6 +336,7 @@
 
       footer { padding: 40px 20px 32px; }
     }
+
   </style>
 </head>
 <body>
@@ -356,7 +359,7 @@
         <button class="lang-option" data-lang="es" role="menuitem">Español</button>
       </div>
     </div>
-    <a class="nav-download" href="https://apps.apple.com/app/sview-swipe-carousel-maker/id6759950270" target="_blank" rel="noopener noreferrer" data-i18n="nav.download">Download</a>
+    <a class="nav-download" href="https://apps.apple.com/us/app/sview-swipe-carousel-maker/id6759950270" data-store-download target="_blank" rel="noopener noreferrer" data-i18n="nav.download">Download</a>
   </div>
 </nav>
 
@@ -369,8 +372,8 @@
   <h1 class="hero-tagline fade-in" data-i18n="hero.tagline">Show your work<br>Tell your story</h1>
   <p class="hero-subtitle fade-in" data-i18n="hero.subtitle">A canvas for photos, videos and animated images. Create seamless carousels and collages, then share your work.</p>
   <div class="hero-actions fade-in">
-  <a class="hero-cta" href="https://apps.apple.com/app/sview-swipe-carousel-maker/id6759950270" target="_blank" rel="noopener noreferrer"><span data-i18n="hero.cta">Download on the App Store</span></a>
-    <a class="hero-instagram" href="https://www.instagram.com/sview.app/" target="_blank" rel="noopener noreferrer" data-i18n="hero.instagram">Follow on Instagram</a>
+  <a class="hero-cta" href="https://apps.apple.com/us/app/sview-swipe-carousel-maker/id6759950270" data-store-download target="_blank" rel="noopener noreferrer"><span data-i18n="hero.cta">Download on the App Store</span></a>
+    <a class="hero-instagram" href="https://www.instagram.com/sview.app/" target="_blank" rel="noopener noreferrer" data-i18n-aria="hero.instagram" aria-label="Follow on Instagram"><img src="assets/brand/instagram.svg" alt="" width="24" height="24"></a>
   </div>
   <!-- GALLERY -->
   <div class="gallery fade-in" id="gallery" role="region" aria-label="App screenshots" tabindex="0">
@@ -770,6 +773,7 @@
   function setLanguage(lang) {
     if (!T[lang]) return;
     currentLang = lang;
+    document.querySelectorAll("[data-i18n-aria]").forEach(function(el) { el.setAttribute("aria-label", T[lang][el.dataset.i18nAria]); });
     document.querySelector('meta[name="description"]').content = T[lang]["hero.subtitle"];
     document.querySelector('meta[property="og:description"]').content = T[lang]["hero.subtitle"];
     document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : (lang === 'zh-Hant' ? 'zh-Hant' : lang);
@@ -803,6 +807,33 @@
     if (n.startsWith('es')) return 'es';
     return 'en';
   }
+
+  // Select a localized App Store product URL from the browser's regional locale.
+  // Apple does not expose the signed-in Apple Account storefront to a website;
+  // unsupported locales use the US product page as a stable fallback.
+  var appStoreUrls = {
+    CN: "https://apps.apple.com/cn/app/sview-%E5%9B%BE%E7%89%87%E6%8E%92%E7%89%88-%E8%B7%A8%E5%B1%8F%E6%8B%BC%E6%8E%A5/id6759950270",
+    US: "https://apps.apple.com/us/app/sview-swipe-carousel-maker/id6759950270",
+    GB: "https://apps.apple.com/gb/app/sview-swipe-carousel-maker/id6759950270",
+    DE: "https://apps.apple.com/de/app/sview-swipe-carousel-maker/id6759950270",
+    JP: "https://apps.apple.com/jp/app/sview-%E5%86%99%E7%9C%9F%E3%82%B3%E3%83%A9%E3%83%BC%E3%82%B8%E3%83%A5-%E3%82%AB%E3%83%AB%E3%83%BC%E3%82%BB%E3%83%AB/id6759950270",
+    KR: "https://apps.apple.com/kr/app/sview-%EC%82%AC%EC%A7%84-%EC%BD%9C%EB%9D%BC%EC%A3%BC-%EC%BA%90%EB%9F%AC%EC%85%80/id6759950270",
+    HK: "https://apps.apple.com/hk/app/sview-%E5%9C%96%E7%89%87%E6%8E%92%E7%89%88-%E8%B7%A8%E5%B1%8F%E6%8B%BC%E6%8E%A5/id6759950270",
+    TW: "https://apps.apple.com/tw/app/sview-%E5%9C%96%E7%89%87%E6%8E%92%E7%89%88-%E8%B7%A8%E5%B1%8F%E6%8B%BC%E6%8E%A5/id6759950270"
+  };
+  var localeList = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+  var storeUrl = appStoreUrls.US;
+  for (var i = 0; i < localeList.length; i++) {
+    var locale = localeList[i];
+    var region = "";
+    try { region = new Intl.Locale(locale).region || ""; } catch (e) {}
+    if (!region && /^zh-(CN|TW|HK|MO)$/i.test(locale)) region = locale.slice(-2).toUpperCase();
+    if (region === "MO") region = "HK";
+    if (appStoreUrls[region]) { storeUrl = appStoreUrls[region]; break; }
+  }
+  document.querySelectorAll("[data-store-download]").forEach(function(el) {
+    el.href = storeUrl;
+  });
 
   // Language dropdown
   var langBtn = document.getElementById('langBtn');
