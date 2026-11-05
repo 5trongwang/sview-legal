@@ -28,21 +28,22 @@
 </head>
 <body>
 
+<p><a href="/">← SView</a></p>
 <h1>Privacy Policy</h1>
-<p class="meta">Last updated: October 11, 2026 &nbsp;·&nbsp; Applies to: SView (iOS)</p>
+<p class="meta">Last updated: November 5, 2026 &nbsp;·&nbsp; Applies to: SView (iOS)</p>
 
 <p>SView ("we", "our", or "the App") is a photo and video layout tool that helps you create seamless carousels and videos for sharing. This Privacy Policy explains what information we collect, how we use it, and your rights.</p>
 
 <h2>1. Information We Collect</h2>
 
-<h2 style="font-size:15px; margin-top:16px;">1.1 Photos and Videos</h2>
-<p>SView requests access to your photo library to import photos and videos for editing and to save exported results back to your library. Editing, trimming, previews, audio processing, and export happen on your device. SView does not upload your imported media or projects to its servers. When you choose to share an export, the iOS share sheet passes the files to the destination you select; that app or service handles them under its own privacy policy. Media stored in iCloud may be downloaded through Apple Photos when you choose it for import.</p>
+<h2 style="font-size:15px; margin-top:16px;">1.1 Photos, Videos and Animated Images</h2>
+<p>SView requests access to your photo library to import selected photos, videos and animated images (including GIF, APNG and animated WebP, as well as supported RAW photos) for editing and to save exported results back to your library. Editing, trimming, previews, audio processing, and export happen on your device. SView does not upload your imported media or projects to its servers. When you choose to share an export, SView may use the iOS share sheet, open a destination app, or pass local exported-media identifiers to TikTok through its Share Kit. Instagram may open with a saved video or let you select the saved Carousel media yourself. These actions are user-initiated; the receiving app or service handles media under its own privacy policy. SView does not automatically publish your work or use TikTok Login Kit to collect a social profile. Media stored in iCloud may be downloaded through Apple Photos when you choose it for import.</p>
 
 <h2 style="font-size:15px; margin-top:16px;">1.2 Anonymous Identifier</h2>
 <p>After initial setup and any iOS Photos prompt have finished, SView starts its online services and uses Firebase Authentication to sign in anonymously. When the sign-in succeeds, Firebase creates a randomly generated user identifier (UID). This identifier:</p>
 <ul>
-  <li>Is not linked to your name, email address, or any personal information</li>
-  <li>Cannot be used to identify you outside the App</li>
+  <li>Does not require you to provide a name or email address</li>
+  <li>Is pseudonymous rather than a guarantee of complete anonymity; it distinguishes the anonymous account used by the App</li>
   <li>Is used to authenticate and de-duplicate optional What's New likes</li>
   <li>May be converted into a pseudonymous StoreKit app account token when you start a purchase; it does not decide whether you have Pro access</li>
 </ul>
@@ -72,7 +73,7 @@
 
 <h2>2. Information We Do NOT Collect</h2>
 <ul>
-  <li>Name, email address, or contact information</li>
+  <li>Name, email address, or contact information through the editing workflow (if you email support, we receive the information you choose to send)</li>
   <li>Precise location data</li>
   <li>Device advertising identifier (IDFA)</li>
   <li>Your photos, videos, audio, project content, filenames, or EXIF metadata (all media processing happens on your device)</li>
@@ -86,10 +87,12 @@
   <li><strong>Firebase Analytics</strong> – only after your choice to share pseudonymous usage analytics for aggregate reporting</li>
 </ul>
 <p>SView also downloads fonts, frame assets, and help content from its Cloudflare-hosted content service. These requests may expose standard connection information, such as your IP address, to the delivery provider. They do not send your imported media or project content.</p>
-<p>These Firebase services operate under Google's Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></p>
+<p>These Firebase services operate under Google's Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></p>
 <p>All in-app purchases and subscription billing are handled by Apple. We do not receive or store any payment information.</p>
 
+<p>When you initiate sharing, destination apps and their sharing components may process your selected exports and connection information under their own policies. TikTok Share Kit is used for sharing, not account login. See <a href="https://www.tiktok.com/legal/page/row/privacy-policy/en">TikTok’s Privacy Policy</a> and the privacy policy of your chosen destination.</p>
 <h2>4. Data Retention</h2>
+<p>Imported sources, editing assets and saved projects are kept in the app’s local storage while needed by your projects. Deleting a project removes its app-managed project files; exports saved to Photos and copies shared to another app remain there until you delete them in that destination. Temporary export/share files are cleaned up after their active use ends. Device backups are controlled by your Apple settings. To request deletion of service-side anonymous records, contact support; uninstalling the app does not itself submit that request.</p>
 <p>Your anonymous UID and any associated What's New like de-duplication record are retained until deletion is requested or the service record is removed under our retention practices. Analytics data already transmitted before you turn sharing off may remain in aggregated Firebase/GA4 reporting according to the configured retention period; turning sharing off stops new collection and resets the analytics data stored locally by the SDK. Uninstalling and reinstalling generally creates a new app instance and may create a new anonymous UID. Your subscription remains with your Apple ID and can be restored through StoreKit; SView does not restore it from a Firebase subscription database.</p>
 
 <h2>5. Children's Privacy</h2>
