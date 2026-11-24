@@ -28,182 +28,19 @@
       if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
+  <link rel="stylesheet" href="assets/site.css">
+  <script defer src="assets/site.js"></script>
   <style>
-    :root {
-      --font-sans: "Assistant", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans", "Microsoft YaHei",
-                   "Noto Sans SC", "Noto Sans JP", "Noto Sans KR", "Malgun Gothic", sans-serif;
-      --font-serif: "Cormorant Garamond", "Noto Serif", "Songti SC", Georgia, serif;
-      --font-heading: var(--font-sans);
-      --color-bg: #fafaf8;
-      --color-surface: #ffffff;
-      --color-text: #111111;
-      --color-text-secondary: #666666;
-      --color-text-muted: #6b6b6b;
-      --color-border: #e8e8e8;
-      --color-rule: #e0e0e0;
-      --color-accent: #000000;
-      --color-accent-hover: #333333;
-      --color-on-accent: #ffffff;
-      --color-nav-scrolled: rgba(250, 250, 248, 0.92);
-      --color-nav-line: rgba(0,0,0,0.06);
-      --color-hover: #f5f5f3;
-      --color-outline-btn: #777777;
-      --color-badge-bg: #f0efed;
-      --color-badge-text: #555555;
-      --color-badge-border: #e0dfdd;
-      --color-note: #666666;
-      --color-body-secondary: #555555;
-      --color-focus: #245cc5;
-      --color-shadow: rgba(0,0,0,0.08);
-      --color-scroll-thumb: rgba(0,0,0,0.22);
-      --logo-filter: none;
-      --gallery-ring: transparent;
-      --media-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 14px 36px rgba(0,0,0,0.12);
-      color-scheme: light;
+    .home-nav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas: "brand sections controls";
     }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --color-bg: #111110;
-        --color-surface: #1c1c1b;
-        --color-text: #f2f2ef;
-        --color-text-secondary: #a8a8a4;
-        --color-text-muted: #8f8f8b;
-        --color-border: #33332f;
-        --color-rule: #2b2b28;
-        --color-accent: #f2f2ef;
-        --color-accent-hover: #d6d6d2;
-        --color-on-accent: #111110;
-        --color-nav-scrolled: rgba(17, 17, 16, 0.88);
-        --color-nav-line: rgba(255,255,255,0.08);
-        --color-hover: #262624;
-        --color-outline-btn: #6a6a66;
-        --color-badge-bg: #232321;
-        --color-badge-text: #bdbdb8;
-        --color-badge-border: #33332f;
-        --color-note: #8f8f8b;
-        --color-body-secondary: #b0b0ab;
-        --color-focus: #7aa7ff;
-        --color-shadow: rgba(0,0,0,0.5);
-        --color-scroll-thumb: rgba(255,255,255,0.28);
-        --logo-filter: invert(1);
-        --gallery-ring: rgba(255,255,255,0.08);
-        --media-shadow: 0 14px 36px rgba(0,0,0,0.45);
-        color-scheme: dark;
-      }
-    }
-    :root[data-theme="dark"] {
-      --color-bg: #111110;
-      --color-surface: #1c1c1b;
-      --color-text: #f2f2ef;
-      --color-text-secondary: #a8a8a4;
-      --color-text-muted: #8f8f8b;
-      --color-border: #33332f;
-      --color-rule: #2b2b28;
-      --color-accent: #f2f2ef;
-      --color-accent-hover: #d6d6d2;
-      --color-on-accent: #111110;
-      --color-nav-scrolled: rgba(17, 17, 16, 0.88);
-      --color-nav-line: rgba(255,255,255,0.08);
-      --color-hover: #262624;
-      --color-outline-btn: #6a6a66;
-      --color-badge-bg: #232321;
-      --color-badge-text: #bdbdb8;
-      --color-badge-border: #33332f;
-      --color-note: #8f8f8b;
-      --color-body-secondary: #b0b0ab;
-      --color-focus: #7aa7ff;
-      --color-shadow: rgba(0,0,0,0.5);
-      --color-scroll-thumb: rgba(255,255,255,0.28);
-      --logo-filter: invert(1);
-      --gallery-ring: rgba(255,255,255,0.08);
-      --media-shadow: 0 14px 36px rgba(0,0,0,0.45);
-      color-scheme: dark;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--color-text);
-      background: var(--color-bg);
-      transition: background-color 0.3s, color 0.3s;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* ===== NAV ===== */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      height: 56px;
-      transition: background 0.3s, border-color 0.3s;
-      border-bottom: 1px solid transparent;
-    }
-    .nav.scrolled {
-      background: var(--color-nav-scrolled);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: var(--color-nav-line);
-    }
-    .nav-logo img { height: 18px; width: auto; display: block; filter: var(--logo-filter); }
-    .nav-right { display: flex; align-items: center; gap: 10px; }
-
-    .lang-selector { position: relative; }
-    .lang-btn {
-      background: none; border: 1px solid var(--color-border); border-radius: 100px;
-      padding: 7px 18px; line-height: 1.6; font-family: var(--font-sans); font-size: 13px; font-weight: 600;
-      color: var(--color-text-secondary); cursor: pointer; letter-spacing: 0.03em;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .lang-btn:hover { border-color: var(--color-text-secondary); color: var(--color-text); }
-    .lang-dropdown {
-      display: none; position: absolute; top: calc(100% + 6px); right: 0;
-      background: var(--color-surface); border: 1px solid var(--color-border);
-      border-radius: 8px; padding: 4px 0; min-width: 120px;
-      box-shadow: 0 4px 16px var(--color-shadow);
-    }
-    .lang-dropdown.open { display: block; }
-    .lang-option {
-      display: block; width: 100%; padding: 8px 16px; background: none; border: none;
-      font-family: var(--font-sans); font-size: 14px; color: var(--color-text-secondary);
-      cursor: pointer; text-align: left; transition: background 0.15s;
-    }
-    .lang-option:hover { background: var(--color-hover); color: var(--color-text); }
-    .lang-option.active { color: var(--color-text); font-weight: 600; }
-
-    .nav-tools { display: flex; align-items: center; gap: 10px; }
-    .theme-btn {
-      box-sizing: border-box; width: 36px; height: 36px; padding: 0;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: none; border: 1px solid var(--color-border); border-radius: 100px;
-      color: var(--color-text-secondary); cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .theme-btn:hover { border-color: var(--color-text-secondary); color: var(--color-text); }
-    .theme-btn svg { width: 16px; height: 16px; display: block; }
-    .theme-btn .icon-sun { display: none; }
-    :root[data-theme="dark"] .theme-btn .icon-sun { display: block; }
-    :root[data-theme="dark"] .theme-btn .icon-moon { display: none; }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) .theme-btn .icon-sun { display: block; }
-      :root:not([data-theme="light"]) .theme-btn .icon-moon { display: none; }
-    }
-
-    .nav-download {
-      display: inline-block; background: var(--color-accent); color: var(--color-on-accent);
-      padding: 7px 18px; border-radius: 100px; font-size: 13px; font-weight: 600;
-      text-decoration: none; transition: background 0.2s; letter-spacing: 0.01em;
-    }
-    .lang-btn, .nav-download { box-sizing: border-box; height: 36px; display: inline-flex; align-items: center; justify-content: center; }
-    .nav-download:hover { background: var(--color-accent-hover); }
+    .home-nav .nav-logo { grid-area: brand; justify-self: start; }
+    .nav-sections { grid-area: sections; display: flex; align-items: center; gap: 24px; }
+    .nav-sections a { display: inline-flex; align-items: center; min-height: 40px; }
+    .home-nav .nav-right { grid-area: controls; justify-self: end; }
+    #features { scroll-margin-top: 72px; }
 
     /* ===== HERO ===== */
     .hero { text-align: center; padding: 56px 24px 0; }
@@ -254,14 +91,6 @@
     .hero-instagram:hover { border-color: transparent; }
     .hero-instagram:hover::before { opacity: 1; }
     .hero-instagram img { filter: var(--logo-filter); }
-    .hero-cta {
-      display: inline-block;
-      background: var(--color-accent); color: var(--color-on-accent);
-      padding: 14px 36px; border-radius: 100px; font-size: 16px; font-weight: 600;
-      text-decoration: none; transition: background 0.2s, transform 0.2s;
-    }
-    .hero-cta:hover { background: var(--color-accent-hover); transform: translateY(-1px); }
-
     /* ===== GALLERY ===== */
     .gallery {
       margin-top: 64px;
@@ -326,6 +155,8 @@
     }
 
     /* ===== FEATURES ===== */
+    html:not(:lang(en)) .feature-guide { display: none; }
+    .feature-guide { display: inline-block; margin-top: 12px; color: var(--color-text); text-underline-offset: 4px; }
     .features {
       max-width: 760px; margin: 0 auto; padding: 0 24px 80px;
     }
@@ -390,24 +221,8 @@
     .specs summary { cursor: pointer; padding: 16px 0; font-weight: 600; }
     .specs details { border-bottom: 1px solid var(--color-rule); }
     .specs details p { padding-bottom: 18px; }
-    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; }
     .lang-option { min-height: 44px; }
     @media (max-width: 400px) { .specs h2 { font-size: 24px; } .specs th, .specs td { padding: 10px 4px; font-size: 12px; } }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center; padding: 56px 24px 40px;
-    }
-    .footer-logo { margin-bottom: 20px; }
-    .footer-logo img { height: 14px; width: auto; opacity: 0.4; filter: var(--logo-filter); }
-    .footer-links { font-size: 14px; color: var(--color-text-muted); margin-bottom: 8px; }
-    .footer-links a { color: var(--color-text-muted); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--color-text-secondary); }
-    .footer-links .sep { margin: 0 10px; }
-    .footer-email { margin-bottom: 16px; }
-    .footer-email a { font-size: 14px; color: var(--color-text-muted); text-decoration: none; transition: color 0.2s; }
-    .footer-email a:hover { color: var(--color-text-secondary); }
-    .footer-copy { font-size: 13px; color: var(--color-text-muted); opacity: 1; }
 
     /* ===== WECHAT GUIDE ===== */
     .wechat-guide {
@@ -451,20 +266,20 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 640px) {
-      .nav { padding: 0 20px; height: 50px; }
-      .nav-logo img { height: 15px; }
-      .lang-btn, .nav-download { height: 32px; }
-      .theme-btn { width: 32px; height: 32px; }
-      .nav-right, .nav-tools { gap: 8px; }
-      .nav-download { padding: 6px 14px; font-size: 12px; }
-      .lang-btn { font-size: 12px; padding: 6px 14px; }
+      .home-nav {
+        height: auto;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 48px auto;
+        grid-template-areas: "brand controls" "sections sections";
+      }
+      .nav-sections { justify-self: center; }
+      #features { scroll-margin-top: 104px; }
 
       .hero { padding: 40px 20px 0; }
       .hero-icon { width: 72px; height: 72px; margin-bottom: 14px; }
       .hero-app-title { font-size: 12px; margin-bottom: 20px; }
       .hero-subtitle { font-size: 15px; margin-bottom: 28px; }
       .hero-instagram { width: 44px; height: 44px; padding: 10px; }
-      .hero-cta { padding: 11px 28px; font-size: 14px; }
 
       .gallery { margin-top: 48px; margin-left: -20px; margin-right: -20px; padding-bottom: 16px; }
       .gallery-scrollbar-wrap { margin-bottom: 44px; }
@@ -481,7 +296,6 @@
       .has-media .feature-title { font-size: 24px; margin-bottom: 8px; }
       .feature-media { max-width: 300px; border-radius: 16px; }
 
-      footer { padding: 40px 20px 32px; }
     }
 
   </style>
@@ -490,10 +304,14 @@
 <main>
 
 <!-- NAV -->
-<nav class="nav" role="navigation">
+<nav class="nav home-nav" role="navigation">
   <a href="/" class="nav-logo" aria-label="SView Home">
     <img src="assets/brand/iconLogo_V3.svg" alt="SView">
   </a>
+  <div class="nav-sections">
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="/guides/" data-i18n="nav.tips">Tips</a>
+  </div>
   <div class="nav-right">
     <div class="nav-tools">
     <button class="theme-btn" id="themeBtn" type="button" data-i18n-aria="nav.theme" aria-label="Toggle dark mode">
@@ -562,7 +380,7 @@
 </section>
 
 <!-- FEATURES -->
-<section class="features">
+<section class="features" id="features">
   <h2 class="features-heading fade-in" data-i18n="features.heading">Why SView</h2>
 <div class="feature-item has-media fade-in"><div class="feature-text"><div class="feature-title" data-i18n="features.video.title">Share work that moves</div><div class="feature-desc" data-i18n="features.video.desc">Import videos, GIFs, APNGs and animated WebP directly onto the canvas. Arrange and edit them, then export MP4 videos for easy sharing.</div></div><div class="feature-media"><video class="feature-video" muted loop playsinline preload="none" width="720" height="960" poster="https://cdn.sviewapp.com/whats-new/v1.3.3/video-0167cb3b3b22.jpg" data-i18n-aria="features.video.title" aria-label=""><source src="https://cdn.sviewapp.com/whats-new/v1.3.3/video-be27b29509f9.mp4" type="video/mp4"></video></div></div>
 <div class="feature-item has-media fade-in"><div class="feature-text"><div class="feature-title" data-i18n="features.modes.title">Three ways to show your work</div><div class="feature-desc" data-i18n="features.modes.desc">Carousel exports separate pages. Scroll moves continuously across the canvas; Slide turns the pages at your chosen interval.</div></div><div class="feature-media"><video class="feature-video" muted loop playsinline preload="none" width="720" height="960" poster="https://cdn.sviewapp.com/whats-new/v1.3.3/modes-915db958e412.jpg" data-i18n-aria="features.modes.title" aria-label=""><source src="https://cdn.sviewapp.com/whats-new/v1.3.3/modes-e336a87de736.mp4" type="video/mp4"></video></div></div>
@@ -572,6 +390,7 @@
     <div class="feature-text">
       <div class="feature-title" data-i18n="features.carousel.title">Seamless Panoramic Carousels</div>
       <div class="feature-desc" data-i18n="features.carousel.desc">Import wide photos and panoramas. SView splits them into perfectly aligned carousel slides.</div>
+      <a class="feature-guide" href="/guides/split-one-photo-across-two-carousel-slides/" aria-label="Tutorial: split one photo across two slides">Tutorial</a>
     </div>
     <div class="feature-media"><video class="feature-video" muted loop playsinline preload="none" width="720" height="960" poster="https://cdn.sviewapp.com/site/features/carousel-a14b90b6622d.jpg" data-i18n-aria="features.carousel.title" aria-label=""><source src="https://cdn.sviewapp.com/site/features/carousel-4ffb2cb71472.mp4" type="video/mp4"></video></div>
   </div>
@@ -639,6 +458,8 @@
 (function() {
   const T = {
     en: {
+      'nav.features': 'Features',
+      'nav.tips': 'Tips',
       'nav.download': 'Download',
       'hero.tagline': 'Show your work\nTell your story',
       "hero.subtitle": "A canvas for photos, videos and animated images. Create seamless carousels and collages, then share your work.",
@@ -688,6 +509,8 @@
       "nav.theme": "Toggle dark mode",
     },
     zh: {
+      'nav.features': '功能',
+      'nav.tips': '使用技巧',
       'nav.download': '下载',
       'hero.tagline': '展示你的作品\n讲述你的故事',
       "hero.subtitle": "用自由画布排版照片、视频与动图，制作无缝轮播和创意拼贴，分享你的作品。",
@@ -737,6 +560,8 @@
       "nav.theme": "切换深色模式",
     },
     'zh-Hant': {
+      'nav.features': '功能',
+      'nav.tips': '使用技巧',
       'nav.download': '下載',
       'hero.tagline': '展示你的作品\n講述你的故事',
       "hero.subtitle": "用自由畫布編排照片、影片與動圖，製作無縫輪播和創意拼貼，分享你的作品。",
@@ -786,6 +611,8 @@
       "nav.theme": "切換深色模式",
     },
     ja: {
+      'nav.features': '機能',
+      'nav.tips': '使い方のヒント',
       'nav.download': 'ダウンロード',
       'hero.tagline': '作品を見せよう\n物語を伝えよう',
       "hero.subtitle": "写真・動画・アニメーション画像を自由にレイアウト。シームレスなカルーセルやコラージュを作って、作品をシェア。",
@@ -835,6 +662,8 @@
       "nav.theme": "ダークモードを切り替え",
     },
     ko: {
+      'nav.features': '기능',
+      'nav.tips': '사용 팁',
       'nav.download': '다운로드',
       'hero.tagline': '당신의 작품을 보여주세요\n당신의 이야기를 들려주세요',
       "hero.subtitle": "사진, 동영상, 움직이는 이미지를 자유롭게 배치하세요. 매끄러운 캐러셀과 콜라주를 만들고 작품을 공유하세요.",
@@ -884,6 +713,8 @@
       "nav.theme": "다크 모드 전환",
     },
     es: {
+      'nav.features': 'Funciones',
+      'nav.tips': 'Consejos',
       'nav.download': 'Descargar',
       'hero.tagline': 'Muestra tu trabajo\nCuenta tu historia',
       "hero.subtitle": "Un lienzo para fotos, vídeos e imágenes animadas. Crea carruseles continuos y collages, y comparte tus obras.",
@@ -976,33 +807,6 @@
     return 'en';
   }
 
-  // Select a localized App Store product URL from the browser's regional locale.
-  // Apple does not expose the signed-in Apple Account storefront to a website;
-  // unsupported locales use the US product page as a stable fallback.
-  var appStoreUrls = {
-    CN: "https://apps.apple.com/cn/app/sview-%E5%9B%BE%E7%89%87%E6%8E%92%E7%89%88-%E8%B7%A8%E5%B1%8F%E6%8B%BC%E6%8E%A5/id6759950270",
-    US: "https://apps.apple.com/us/app/sview-swipe-carousel-maker/id6759950270",
-    GB: "https://apps.apple.com/gb/app/sview-swipe-carousel-maker/id6759950270",
-    DE: "https://apps.apple.com/de/app/sview-swipe-carousel-maker/id6759950270",
-    JP: "https://apps.apple.com/jp/app/sview-%E5%86%99%E7%9C%9F%E3%82%B3%E3%83%A9%E3%83%BC%E3%82%B8%E3%83%A5-%E3%82%AB%E3%83%AB%E3%83%BC%E3%82%BB%E3%83%AB/id6759950270",
-    KR: "https://apps.apple.com/kr/app/sview-%EC%82%AC%EC%A7%84-%EC%BD%9C%EB%9D%BC%EC%A3%BC-%EC%BA%90%EB%9F%AC%EC%85%80/id6759950270",
-    HK: "https://apps.apple.com/hk/app/sview-%E5%9C%96%E7%89%87%E6%8E%92%E7%89%88-%E8%B7%A8%E5%B1%8F%E6%8B%BC%E6%8E%A5/id6759950270",
-    TW: "https://apps.apple.com/tw/app/sview-%E5%9C%96%E7%89%87%E6%8E%92%E7%89%88-%E8%B7%A8%E5%B1%8F%E6%8B%BC%E6%8E%A5/id6759950270"
-  };
-  var localeList = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
-  var storeUrl = appStoreUrls.US;
-  for (var i = 0; i < localeList.length; i++) {
-    var locale = localeList[i];
-    var region = "";
-    try { region = new Intl.Locale(locale).region || ""; } catch (e) {}
-    if (!region && /^zh-(CN|TW|HK|MO)$/i.test(locale)) region = locale.slice(-2).toUpperCase();
-    if (region === "MO") region = "HK";
-    if (appStoreUrls[region]) { storeUrl = appStoreUrls[region]; break; }
-  }
-  document.querySelectorAll("[data-store-download]").forEach(function(el) {
-    el.href = storeUrl;
-  });
-
   // Language dropdown
   var langBtn = document.getElementById('langBtn');
   var langDropdown = document.getElementById('langDropdown');
@@ -1028,42 +832,6 @@
       langDropdown.classList.remove("open"); langBtn.setAttribute("aria-expanded", "false"); langBtn.focus();
     }
   });
-
-  // Theme toggle: flips the effective theme; choosing the same as the device setting returns to auto.
-  var themeBtn = document.getElementById('themeBtn');
-  var darkMQ = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
-  var themeColorMetas = document.querySelectorAll('meta[name="theme-color"]');
-  function systemTheme() { return darkMQ && darkMQ.matches ? 'dark' : 'light'; }
-  function effectiveTheme() { return document.documentElement.getAttribute('data-theme') || systemTheme(); }
-  function syncThemeUI() {
-    var t = effectiveTheme();
-    themeBtn.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
-    var c = t === 'dark' ? '#111110' : '#fafaf8';
-    themeColorMetas.forEach(function(m) { m.setAttribute('content', c); });
-  }
-  themeBtn.addEventListener('click', function() {
-    var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
-    if (next === systemTheme()) {
-      document.documentElement.removeAttribute('data-theme');
-      try { localStorage.removeItem('sview-theme'); } catch (e) {}
-    } else {
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('sview-theme', next); } catch (e) {}
-    }
-    syncThemeUI();
-  });
-  if (darkMQ) {
-    var onSystemChange = function() { syncThemeUI(); };
-    if (darkMQ.addEventListener) darkMQ.addEventListener('change', onSystemChange);
-    else if (darkMQ.addListener) darkMQ.addListener(onSystemChange);
-  }
-  syncThemeUI();
-
-  // Nav scroll
-  var nav = document.querySelector('.nav');
-  window.addEventListener('scroll', function() {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
 
   // Gallery scroll system
   var gallery = document.getElementById('gallery');
